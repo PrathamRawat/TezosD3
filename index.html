@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>D3</title>
+        <script src="https://d3js.org/d3.v5.min.js" charset="utf-8"></script>
+        <script src="https://cdn.jsdelivr.net/gh/cryptonomic/conseiljs/dist-web/conseiljs.min.js"
+        integrity="sha384-eSd4aru4A1k5ejohBE9T8uPo4P1TT6TTdnuO71HrrNr0pmZaF+C5/YQyYv0JNqhV"
+        crossorigin="anonymous"></script>
+        <style>
+            .barChart {
+                font: 10px sans-serif;
+                background-color: lavender;
+                text-align: center;
+                padding: 3px;
+                margin: 1px;
+                color: white;
+            }
+        </style>
+    </head>
+    <body>
+        <h2>Forbes' Top 20 Richest Accounts</h2>
+        <svg id="topAccounts" class="barChart">
+        </svg>
+        <script src="topAccounts.js"></script>
+        <h2>Top 20 Must Watch Bakers</h2>
+        <svg id="topBakers" class="pieChart">
+        </svg>
+        <script id="topBakers.js"></script>
+        <h2>TIME Top Delegates</h2>
+        <svg id="topDelegates">
+        </svg>
+        <script src="topDelegates.js"></script>
+    </body>
+</html>
