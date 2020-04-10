@@ -19,12 +19,34 @@
                 width: 1000px;
                 height: 1000px;
             }
+            .chartContainer {
+                background-color: lavender;
+                overflow: hidden;
+                overflow-x: scroll;
+                width: 1200px;
+                padding: 25px;
+                scroll-behavior: smooth;
+            }
+            .toolTip {
+                position: absolute;
+                display: none;
+                min-width: 80px;
+                height: auto;
+                background: none repeat scroll 0 0 #ffffff;
+                border: 1px solid #6F257F;
+                padding: 14px;
+                border-radius: 10px;
+                text-align: center;
+                font-family: sans-serif;
+              }
         </style>
     </head>
     <body>
         <h2>Forbes' Top 20 Richest Accounts</h2>
-        <svg id="topAccounts" class="barChart">
-        </svg>
+        <div class="chartContainer">
+            <svg id="topAccounts" class="barChart">
+            </svg>
+        </div>
         <script src="topAccounts.js"></script>
         <h2>Top 20 Must Watch Bakers</h2>
         <svg id="topBakers" class="pieChart">
@@ -34,5 +56,9 @@
         <svg id="topDelegates">
         </svg>
         <script src="topDelegates.js"></script>
+        <!-- <h2>Daily Fees</h2>
+        <svg id="dailyFees">
+        </svg>
+        <script src="dailyFees.js"></script> -->
     </body>
 </html>

@@ -7,31 +7,39 @@ const conseilServer = { url: 'https://conseil-prod.cryptonomic-infra.tech:443', 
 let accountQuery = async function() {
     let query = conseiljs.ConseilQueryBuilder.blankQuery();
     query = conseiljs.ConseilQueryBuilder.addFields(query, 'balance');
+    query = conseiljs.ConseilQueryBuilder.addFields(query, 'account_id');
     query = conseiljs.ConseilQueryBuilder.addOrdering(query, "balance", conseiljs.ConseilSortDirection.DESC);
-    query = conseiljs.ConseilQueryBuilder.setLimit(query, 20);
+    query = conseiljs.ConseilQueryBuilder.setLimit(query, 1000);
 
     const result = await conseiljs.ConseilDataClient.executeEntityQuery(conseilServer, 'tezos', conseilServer.network, 'accounts', query);
 
     // console.log(result);
 
-    data = result.map(function(x) {return x.balance});
+    data = result.map(function(x) {return x.balance / 1000000});
+    accounts = result.map(function(x) {return x.account_id})
 
-    width = 800;
+    // console.log(accounts);
+    
+
+    height = 500;
     
     // console.log(data);
-    
 
-    x = d3.scaleLinear()
+    y = d3.scaleLinear()
         .domain([0, d3.max(data)])
-        .range([0, width])
+        .range([0, height])
+    
+    yScale = d3.scaleLinear()
+        .domain([0, d3.max(data)])
+        .range([0, -height])
 
-    y = d3.scaleBand()
+    x = d3.scaleBand()
         .domain(d3.range(data.length))
         .range([0, 25 * data.length]);
 
     const svg = d3.select("#topAccounts")
-        .attr("width", width)
-        .attr("height", y.range()[1])
+        .attr("height", height)
+        .attr("width", x.range()[1])
         .attr("font-family", "sans-serif")
         .attr("font-size", "10")
         .attr("text-anchor", "end");
@@ -39,19 +47,35 @@ let accountQuery = async function() {
     const bar = svg.selectAll("g")
         .data(data)
         .join("g")
-          .attr("transform", (d, i) => `translate(0,${y(i)})`);
+          .attr("transform", (d, i) => `translate(${x(i) + 65}, ${500 - y(d)})`);
 
     bar.append("rect")
         .attr("fill", "purple")
-        .attr("width", x)
-        .attr("height", y.bandwidth() - 1);
+        .attr("width", x.bandwidth() - 1)
+        .attr("height", y);
 
     bar.append("text")
         .attr("fill", "white")
-        .attr("x", d => x(d) - 3)
-        .attr("y", y.bandwidth() / 2)
+        .attr("x", x.bandwidth() / 2)
+        .attr("y", d => y(d) - 3)
         .attr("dy", "0.35em")
-        .text(d => d);
+        .text(d => accounts[d]);
+
+    var tooltip = d3.select("body").append("div").attr("class", "toolTip");
+
+    bar.on("mousemove", function(d, i){
+        tooltip
+        .style("left", d3.event.pageX - 50 + "px")
+        .style("top", d3.event.pageY - 70 + "px")
+        .style("display", "inline-block")
+        .html((d) + " XTz<br>" + (accounts[i]));
+    })
+        .on("mouseout", function(d){ tooltip.style("display", "none");});
+
+    const yAxis = d3.axisLeft()
+                    .scale(yScale);
+    
+    svg.append("g").attr("transform", "translate(60, 500)").style("color", "black").call(yAxis);
 
     return result;
 }
