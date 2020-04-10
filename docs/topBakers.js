@@ -1,4 +1,3 @@
-console.log("nice");
 
 
 let bakerQuery = async function() {
@@ -12,7 +11,7 @@ let bakerQuery = async function() {
 
     const result = await conseiljs.ConseilDataClient.executeEntityQuery(conseilServer, 'tezos', conseilServer.network, 'blocks', query);
 
-    console.log(result);
+    // console.log(result);
 
     preliminaryData = result.map(function(x) {return x.baker});
 
@@ -42,7 +41,7 @@ let bakerQuery = async function() {
 
     data.sort(sortFunction);
     
-    console.log(data);
+    // console.log(data);
     
     bakerCount = data.map(function(x) {return x[1]});
 

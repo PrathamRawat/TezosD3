@@ -12,13 +12,13 @@ let accountQuery = async function() {
 
     const result = await conseiljs.ConseilDataClient.executeEntityQuery(conseilServer, 'tezos', conseilServer.network, 'accounts', query);
 
-    console.log(result);
+    // console.log(result);
 
     data = result.map(function(x) {return x.balance});
 
     width = 800;
     
-    console.log(data);
+    // console.log(data);
     
 
     x = d3.scaleLinear()
