@@ -19,7 +19,6 @@ let accountQuery = async function() {
     accounts = result.map(function(x) {return x.account_id})
 
     // console.log(accounts);
-    
 
     height = 500;
     
@@ -52,14 +51,12 @@ let accountQuery = async function() {
     bar.append("rect")
         .attr("fill", "purple")
         .attr("width", x.bandwidth() - 1)
+        .attr("height", 0);
+  
+    bar.selectAll("rect")
+        .transition()
+        .duration(800)
         .attr("height", y);
-
-    bar.append("text")
-        .attr("fill", "white")
-        .attr("x", x.bandwidth() / 2)
-        .attr("y", d => y(d) - 3)
-        .attr("dy", "0.35em")
-        .text(d => accounts[d]);
 
     var tooltip = d3.select("body").append("div").attr("class", "toolTip");
 

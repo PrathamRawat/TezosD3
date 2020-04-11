@@ -50,14 +50,12 @@ let delegateQuery = async function() {
     bar.append("rect")
         .attr("fill", "red")
         .attr("width", x.bandwidth() - 1)
-        .attr("height", y);
+        .attr("height", 0);
 
-    bar.append("text")
-        .attr("fill", "white")
-        .attr("x", x.bandwidth() / 2)
-        .attr("y", d => y(d) - 3)
-        .attr("dy", "0.35em")
-        .text(d => accounts[d]);
+    bar.selectAll("rect")
+        .transition()
+        .duration(800)
+        .attr("height", y);
 
     var tooltip = d3.select("body").append("div").attr("class", "toolTip");
 
