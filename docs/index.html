@@ -25,7 +25,9 @@
                 overflow-x: scroll;
                 width: 1200px;
                 padding: 25px;
+                padding-left: 0;
                 scroll-behavior: smooth;
+                border-radius: 25px;
             }
             .toolTip {
                 position: absolute;
@@ -39,11 +41,23 @@
                 text-align: center;
                 font-family: sans-serif;
               }
+              .axis {
+                width: 60px;
+                background-color: lavender;
+                padding: 5px;
+                height: 500px;
+                border-color: lavender;
+                border-style: solid;
+                border-left-width: 25px;
+                position: absolute;
+              }
         </style>
     </head>
     <body>
         <h2>Forbes' Top 20 Richest Accounts</h2>
         <div class="chartContainer">
+            <svg id="topAccountsAxis" class="axis">
+            </svg>
             <svg id="topAccounts" class="barChart">
             </svg>
         </div>

@@ -47,7 +47,7 @@ let accountQuery = async function() {
     const bar = svg.selectAll("g")
         .data(data)
         .join("g")
-          .attr("transform", (d, i) => `translate(${x(i) + 65}, ${500 - y(d)})`);
+          .attr("transform", (d, i) => `translate(${x(i) + 100}, ${500 - y(d)})`);
 
     bar.append("rect")
         .attr("fill", "purple")
@@ -75,7 +75,11 @@ let accountQuery = async function() {
     const yAxis = d3.axisLeft()
                     .scale(yScale);
     
-    svg.append("g").attr("transform", "translate(60, 500)").style("color", "black").call(yAxis);
+    const axisSVG = d3.select("#topAccountsAxis")
+        .attr("height", height)
+        .attr("width", 60);
+
+    axisSVG.append("g").attr("transform", "translate(60, 500)").style("color", "black").call(yAxis);
 
     return result;
 }
