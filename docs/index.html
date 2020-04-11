@@ -29,6 +29,9 @@
                 scroll-behavior: smooth;
                 border-radius: 25px;
             }
+            #topDelegatesContainer {
+                background-color: pink;
+            }
             .toolTip {
                 position: absolute;
                 display: none;
@@ -51,6 +54,10 @@
                 border-left-width: 25px;
                 position: absolute;
               }
+              #topDelegatesAxis {
+                  background-color: pink;
+                  border-color: pink;
+              }
         </style>
     </head>
     <body>
@@ -67,8 +74,12 @@
         </svg>
         <script src="topBakers.js"></script>
         <h2>TIME Top Delegates</h2>
-        <svg id="topDelegates">
-        </svg>
+        <div class="chartContainer" id="topDelegatesContainer">
+            <svg id="topDelegatesAxis" class="axis">
+            </svg>
+            <svg id="topDelegates">
+            </svg>
+        </div>
         <script src="topDelegates.js"></script>
         <!-- <h2>Daily Fees</h2>
         <svg id="dailyFees">
