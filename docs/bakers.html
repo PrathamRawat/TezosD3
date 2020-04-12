@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Baker Data</title>
+    <script src="https://d3js.org/d3.v5.min.js" charset="utf-8"></script>
+    <script src="https://cdn.jsdelivr.net/gh/cryptonomic/conseiljs/dist-web/conseiljs.min.js"
+    integrity="sha384-eSd4aru4A1k5ejohBE9T8uPo4P1TT6TTdnuO71HrrNr0pmZaF+C5/YQyYv0JNqhV"
+    crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="stylesheet.css">
+    <script src="conseilSetup.js"></script>
+</head>
+<body>
+    <a href="index.html"><- Back</a>
+    <h2>Top Bakers by Stake</h2>
+    <div class="chartContainer">
+        <svg id="topStakersAxis" class="axis">
+        </svg>
+        <svg id="topStakers" class="barChart">
+        </svg>
+    </div>
+    <br>
+    Number of Accounts: <input type="number" id="stakeNumber" value="100">
+    <br>
+    <button id="reload">Reload</button>
+    <script src="topStakers.js"></script>
+    <h2>Top Bakers by Block</h2>
+    <div class="chartContainer">
+        <svg id="topBakersAxis" class="axis">
+        </svg>
+        <svg id="topBakers" class="barChart">
+        </svg>
+    </div>
+    <br>
+    Number of Accounts: <input type="number" id="blockNumber" value="100">
+    <br>
+    Blocks Before: <input type="datetime" id="blockDate">
+    <br>
+    <button id="reload">Reload</button>
+    <script src="topBakers.js"></script>
+</body>
+</html>
