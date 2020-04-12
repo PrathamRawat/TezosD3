@@ -1,8 +1,9 @@
 
-let accountQuery = async function(limit) {
+let contractQuery = async function(limit) {
     let query = conseiljs.ConseilQueryBuilder.blankQuery();
     query = conseiljs.ConseilQueryBuilder.addFields(query, 'balance');
     query = conseiljs.ConseilQueryBuilder.addFields(query, 'account_id');
+    query = conseiljs.ConseilQueryBuilder.addPredicate(query, 'account_id', conseiljs.ConseilOperator.STARTSWITH, ["KT1"]);
     query = conseiljs.ConseilQueryBuilder.addOrdering(query, "balance", conseiljs.ConseilSortDirection.DESC);
     query = conseiljs.ConseilQueryBuilder.setLimit(query, limit);
 
@@ -31,7 +32,7 @@ let accountQuery = async function(limit) {
         .domain(d3.range(data.length))
         .range([0, 25 * data.length]);
 
-    const svg = d3.select("#topAccounts")
+    const svg = d3.select("#topContracts")
         .attr("height", height)
         .attr("width", x.range()[1])
         .attr("font-family", "sans-serif")
@@ -67,7 +68,7 @@ let accountQuery = async function(limit) {
     const yAxis = d3.axisLeft()
                     .scale(yScale);
     
-    const axisSVG = d3.select("#topAccountsAxis")
+    const axisSVG = d3.select("#topContractsAxis")
         .attr("height", height)
         .attr("width", 60);
 
@@ -76,8 +77,8 @@ let accountQuery = async function(limit) {
     return result;
 }
 
-accountQuery(100);
+contractQuery(100);
 
-d3.select("#accountsReload").on("click", function() {
-    accountQuery(document.getElementById("accountsNumber").value);
+d3.select("#contractReload").on("click", function() {
+    contractQuery(document.getElementById("contractNumber").value);
 });
