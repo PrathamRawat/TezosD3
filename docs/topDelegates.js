@@ -2,12 +2,12 @@
 
 // const d3 = require("d3@5");
 
-let delegateQuery = async function() {
+let delegateQuery = async function(limit) {
     let query = conseiljs.ConseilQueryBuilder.blankQuery();
     query = conseiljs.ConseilQueryBuilder.addFields(query, 'delegated_balance');
     query = conseiljs.ConseilQueryBuilder.addFields(query, 'pkh');
     query = conseiljs.ConseilQueryBuilder.addOrdering(query, "delegated_balance", conseiljs.ConseilSortDirection.DESC);
-    query = conseiljs.ConseilQueryBuilder.setLimit(query, 100);
+    query = conseiljs.ConseilQueryBuilder.setLimit(query, limit);
 
     const result = await conseiljs.ConseilDataClient.executeEntityQuery(conseilServer, 'tezos', conseilServer.network, 'delegates', query);
 
@@ -80,4 +80,10 @@ let delegateQuery = async function() {
     return result;
 }
 
-delegateQuery();
+delegateQuery(100);
+
+console.log(d3.select("#number").value);
+
+d3.select("#reload").on("click", function() {
+    delegateQuery(document.getElementById("number").value);
+});

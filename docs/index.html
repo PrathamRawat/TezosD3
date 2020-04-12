@@ -6,84 +6,12 @@
         <script src="https://cdn.jsdelivr.net/gh/cryptonomic/conseiljs/dist-web/conseiljs.min.js"
         integrity="sha384-eSd4aru4A1k5ejohBE9T8uPo4P1TT6TTdnuO71HrrNr0pmZaF+C5/YQyYv0JNqhV"
         crossorigin="anonymous"></script>
-        <style>
-            .barChart {
-                font: 10px sans-serif;
-                background-color: lavender;
-                text-align: center;
-                padding: 3px;
-                margin: 1px;
-                color: white;
-            }
-            .pieChart {
-                width: 1000px;
-                height: 1000px;
-            }
-            .chartContainer {
-                background-color: lavender;
-                overflow: hidden;
-                overflow-x: scroll;
-                width: 1200px;
-                padding: 25px;
-                padding-left: 0;
-                scroll-behavior: smooth;
-                border-radius: 25px;
-            }
-            #topDelegatesContainer {
-                background-color: pink;
-            }
-            .toolTip {
-                position: absolute;
-                display: none;
-                min-width: 80px;
-                height: auto;
-                background: none repeat scroll 0 0 #ffffff;
-                border: 1px solid #6F257F;
-                padding: 14px;
-                border-radius: 10px;
-                text-align: center;
-                font-family: sans-serif;
-              }
-              .axis {
-                width: 60px;
-                background-color: lavender;
-                padding: 5px;
-                height: 500px;
-                border-color: lavender;
-                border-style: solid;
-                border-left-width: 25px;
-                position: absolute;
-              }
-              #topDelegatesAxis {
-                  background-color: pink;
-                  border-color: pink;
-              }
-        </style>
+        <link rel="stylesheet" href="stylesheet.css">
     </head>
     <body>
-        <h2>Forbes' Top <strike>20</strike> 1000 Richest Accounts</h2>
-        <div class="chartContainer">
-            <svg id="topAccountsAxis" class="axis">
-            </svg>
-            <svg id="topAccounts" class="barChart">
-            </svg>
-        </div>
-        <script src="topAccounts.js"></script>
-        <h2>Top 20 Must Watch Bakers</h2>
-        <svg id="topBakers" class="pieChart">
-        </svg>
-        <script src="topBakers.js"></script>
-        <h2>TIME Top Delegates</h2>
-        <div class="chartContainer" id="topDelegatesContainer">
-            <svg id="topDelegatesAxis" class="axis">
-            </svg>
-            <svg id="topDelegates">
-            </svg>
-        </div>
-        <script src="topDelegates.js"></script>
-        <!-- <h2>Daily Fees</h2>
-        <svg id="dailyFees">
-        </svg>
-        <script src="dailyFees.js"></script> -->
+        <a href="accounts.html">Accounts</a>
+        <a href="bakers.html">Bakers</a>
+        <a href="delegates.html">Delegates</a>
+        <a href="fees.html">Fees</a>
     </body>
 </html>

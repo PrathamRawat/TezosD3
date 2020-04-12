@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Data</title>
+    <script src="https://d3js.org/d3.v5.min.js" charset="utf-8"></script>
+    <script src="https://cdn.jsdelivr.net/gh/cryptonomic/conseiljs/dist-web/conseiljs.min.js"
+    integrity="sha384-eSd4aru4A1k5ejohBE9T8uPo4P1TT6TTdnuO71HrrNr0pmZaF+C5/YQyYv0JNqhV"
+    crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="stylesheet.css">
+    <script src="conseilSetup.js"></script>
+</head>
+<body>
+    <a href="index.html"><- Back</a>
+    <h2>Forbes' Top <strike>20</strike> 1000 Richest Accounts</h2>
+    <div class="chartContainer">
+        <svg id="topAccountsAxis" class="axis">
+        </svg>
+        <svg id="topAccounts" class="barChart">
+        </svg>
+    </div>
+    Number of Accounts: <input type="number" id="number" value="100">
+    <button id="reload">Reload</button>
+    <script src="topAccounts.js"></script>
+</body>
+</html>

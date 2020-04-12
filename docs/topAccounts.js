@@ -1,15 +1,10 @@
-// import { ConseilQueryBuilder, ConseilOperator, ConseilDataClient, ConseilSortDirection } from 'conseiljs';
 
-// const d3 = require("d3@5");
-const tezosNode = '...';
-const conseilServer = { url: 'https://conseil-prod.cryptonomic-infra.tech:443', apiKey: 'f86ab59d-d2ea-443b-98e2-6c0785e3de8c', network: 'mainnet' };
-
-let accountQuery = async function() {
+let accountQuery = async function(limit) {
     let query = conseiljs.ConseilQueryBuilder.blankQuery();
     query = conseiljs.ConseilQueryBuilder.addFields(query, 'balance');
     query = conseiljs.ConseilQueryBuilder.addFields(query, 'account_id');
     query = conseiljs.ConseilQueryBuilder.addOrdering(query, "balance", conseiljs.ConseilSortDirection.DESC);
-    query = conseiljs.ConseilQueryBuilder.setLimit(query, 1000);
+    query = conseiljs.ConseilQueryBuilder.setLimit(query, limit);
 
     const result = await conseiljs.ConseilDataClient.executeEntityQuery(conseilServer, 'tezos', conseilServer.network, 'accounts', query);
 
@@ -22,7 +17,7 @@ let accountQuery = async function() {
 
     height = 500;
     
-    // console.log(data);
+    console.log(data);
 
     y = d3.scaleLinear()
         .domain([0, d3.max(data)])
@@ -81,4 +76,10 @@ let accountQuery = async function() {
     return result;
 }
 
-accountQuery();
+accountQuery(100);
+
+console.log(d3.select("#number").value);
+
+d3.select("#reload").on("click", function() {
+    accountQuery(document.getElementById("number").value);
+});
