@@ -4,8 +4,8 @@ let bakerQuery = async function(limit, date) {
     let query = conseiljs.ConseilQueryBuilder.blankQuery();
     query = conseiljs.ConseilQueryBuilder.addFields(query, 'baker');
     query = conseiljs.ConseilQueryBuilder.addFields(query, 'hash');
-    query = conseiljs.ConseilQueryBuilder.addPredicate(query, 'timestamp', conseiljs.ConseilOperator.AFTER, [Math.round(new Date().getTime() / 1000) - 2929746]);
-    query = conseiljs.ConseilQueryBuilder.addAggregationFunction(query, "hash", conseiljs.ConseilFunction.COUNT);
+    query = conseiljs.ConseilQueryBuilder.addPredicate(query, 'timestamp', conseiljs.ConseilOperator.AFTER, [date]);
+    query = conseiljs.ConseilQueryBuilder.addAggregationFunction(query, "hash", conseiljs.ConseilFunction.count);
     query = conseiljs.ConseilQueryBuilder.addOrdering(query, "count_hash", conseiljs.ConseilSortDirection.DESC);
     query = conseiljs.ConseilQueryBuilder.setLimit(query, limit);
 
@@ -13,47 +13,77 @@ let bakerQuery = async function(limit, date) {
 
     console.log(result);
 
-    preliminaryData = result.map(function(x) {return x.baker});
-
-    data = [[preliminaryData[0], 1]];
+    data = result.map(function(x) {return x.count_hash});
+    accounts = result.map(function(x) {return x.baker});
     
-    // console.log(data);
+    console.log(data);
     
-    bakerCount = data.map(function(x) {return x[1]});
+    // bakerCount = data.map(function(x) {return x[1]});
+    
 
-    x = d3.scaleLinear()
-        .domain([0, d3.max(bakerCount)])
-        .range([0, width])
+    y = d3.scaleLinear()
+        .domain([0, data[0]])
+        .range([0, height])
 
-    y = d3.scaleBand()
+    yScale = d3.scaleLinear()
+        .domain([0, data[0]])
+        .range([0, -height])
+
+    x = d3.scaleBand()
         .domain(d3.range(data.length))
         .range([0, 25 * data.length]);
 
     const svg = d3.select("#topBakers")
-        .attr("width", width)
-        .attr("height", y.range()[1])
-        .attr("font-family", "serif")
+        .attr("height", height)
+        .attr("width", x.range()[1])
+        .attr("font-family", "sans-serif")
         .attr("font-size", "10")
         .attr("text-anchor", "end");
-    
+
+    svg.selectAll("*").remove();
+
     const bar = svg.selectAll("g")
-        .data(bakerCount)
+        .data(data)
         .join("g")
-          .attr("transform", (d, i) => `translate(0,${y(i)})`);
+        .attr("transform", (d, i) => `translate(${x(i) + 100}, ${500 - y(d)})`);
 
     bar.append("rect")
-        .attr("fill", "red")
-        .attr("width", x)
-        .attr("height", y.bandwidth() - 1);
+        .attr("fill", "purple")
+        .attr("width", x.bandwidth() - 1)
+        .attr("height", 0);
 
-    bar.append("text")
-        .attr("fill", "white")
-        .attr("x", d => x(d) - 3)
-        .attr("y", y.bandwidth() / 2)
-        .attr("dy", "0.35em")
-        .text(d => d);
+    bar.selectAll("rect")
+        .transition()
+        .duration(800)
+        .attr("height", y);
 
-    return result;
+    var tooltip = d3.select("body").append("div").attr("class", "toolTip");
+
+    bar.on("mousemove", function(d, i){
+        tooltip
+        .style("left", d3.event.pageX - 50 + "px")
+        .style("top", d3.event.pageY - 70 + "px")
+        .style("display", "inline-block")
+        .html((d) + " Blocks<br>" + (accounts[i]));
+    })
+        .on("mouseout", function(d){ tooltip.style("display", "none");});
+
+    const yAxis = d3.axisLeft()
+                    .scale(yScale);
+
+    const axisSVG = d3.select("#topBakersAxis")
+        .attr("height", height)
+        .attr("width", 60);
+
+    axisSVG.selectAll("*").remove();
+
+    axisSVG.append("g").attr("transform", "translate(60, 500)").style("color", "black").call(yAxis);
+
+    return result;                                              
 }
 
-bakerQuery(20, 5);
+bakerQuery(100, Math.round(new Date().getTime()) - 2929746);
+
+d3.select("#blockReload").on("click", function() {
+    bakerQuery(document.getElementById("blockNumber").value, new Date(document.getElementById("blockDate").value).getTime());
+});
