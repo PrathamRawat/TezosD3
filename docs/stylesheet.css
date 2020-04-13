@@ -20,9 +20,6 @@
     scroll-behavior: smooth;
     border-radius: 25px;
 }
-#topDelegatesContainer {
-    background-color: pink;
-}
 .toolTip {
     position: absolute;
     display: none;
@@ -44,8 +41,4 @@
     border-style: solid;
     border-left-width: 25px;
     position: absolute;
-}
-#topDelegatesAxis {
-    background-color: pink;
-    border-color: pink;
 }
