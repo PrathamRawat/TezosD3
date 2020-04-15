@@ -13,7 +13,7 @@ let bphQuery = async function(date) {
 
     label = [];
     timestamps = [];
-    value = [];
+    values = [];
     data = [];
 
     // now = new Date();
@@ -27,7 +27,7 @@ let bphQuery = async function(date) {
     for(var time = new Date(date).getTime(); time < now; time += 3600000) {
         label.push(new Date(time));
         timestamps.push(time);
-        value.push(0)
+        values.push(0)
     }
 
     console.log(timestamps);
@@ -36,19 +36,19 @@ let bphQuery = async function(date) {
     for(var r = 0; r < result.length; r++) {
         for(var t = label.length - 1; t > 0; t--) {
             if(parseInt(result[r].timestamp) > parseInt(label[t].getTime())) {
-                value[t] += 1;
+                values[t] += 1;
                 break;
             }
         }
     }  
 
-    for(var x = 0; x < value.length; x++) {
-        data.push({date : label[x].getTime(), value : parseInt(value[x])});
+    for(var x = 0; x < values.length; x++) {
+        data.push({date : label[x].getTime(), values : parseInt(values[x])});
     }
 
     console.log(data);
     
-    value.pop()
+    values.pop()
     timestamps.pop()
     data.pop()
     label.pop()
@@ -59,11 +59,11 @@ let bphQuery = async function(date) {
     
 
     var y = d3.scaleLinear()
-      .domain([0, d3.max(value) + 5])
+      .domain([0, d3.max(values) + 5])
       .range([ 0, height ]);
 
     var yScale = d3.scaleLinear()
-      .domain([0, d3.max(value) + 5])
+      .domain([0, d3.max(values) + 5])
       .range([ 0, -height]);
 
     var x = d3.scaleTime()
@@ -91,41 +91,31 @@ let bphQuery = async function(date) {
         .attr("stroke-width", 2)
         .attr("d", d3.line()
             .x(function(d) { return x(d.date) })
-            .y(function(d) { return y(d.value) }))
+            .y(function(d) { return y(d.values) }))
         .attr("transform", "translate(25, 500),scale(1, -1)")
 
     const yAxis = d3.axisLeft()
                     .scale(yScale);
 
-    // const axisSVG = d3.select("#bphAxis")
-    //     .attr("height", height)
-    //     .attr("width", 60);
-
-    // axisSVG.selectAll("*").remove();
-
     svg.append("g").attr("transform", "translate(25, 500)").style("color", "black").call(yAxis);
 
-    // svg.append("g").attr("transform", "translate(0," + height + ")").call(d3.axisBottom().scale(x));
+    point = svg.append("circle")
 
-    dot = svg.append("circle")
-
-    chartLabel = d3.select("#bphLabel");
+    display = d3.select("#bphLabel");
     svg.on("mousemove", function() {
         date = x.invert(d3.event.clientX - d3.event.target.getBoundingClientRect().left) 
         date.setHours(date.getHours() + Math.round(date.getMinutes()/60.0));
         date.setMinutes(0, 0, 0);
         
-        console.log(date.getTime());
-        
         d = timestamps.indexOf(date.getTime());
 
-        dot
+        point
             .attr("cx", x(date.getTime()) - 3)
-            .attr("cy", 500 - y(value[d - 4]))
+            .attr("cy", 500 - y(values[d - 4]))
             .attr("r", 5)
             .attr("fill", "purple")
 
-        chartLabel.html(date.toString() + " " + (value[d - 4]) + " Blocks per Hour")
+        display.html(date.toString() + " " + (values[d - 4]) + " Blocks per Hour")
     });
 
     return result;                                              
@@ -140,5 +130,5 @@ now = now.getTime();
 bphQuery(now - (3600000 * 168));
 
 d3.select("#bphReload").on("click", function() {
-    bphQuery(new Date(document.getElementById("bphDate").value).getTime());
+    bphQuery(new Date(document.getElementById("bphDate").values).getTime());
 });

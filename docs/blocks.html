@@ -24,6 +24,21 @@
     <button id="bphReload">Reload</button>
     <script src="hourlyBlocks.js"></script>
 
+    <h2>Priority Zero Blocks Per Hour vs. Regular Blocks per Hour</h2>
+    <svg id="priorityBPH" class="barChart">
+    </svg>
+    <br>
+    <span id="priorityLabel" style="color: purple"></span>
+    <br>
+    <span id="nonpriorityLabel" style="color: blue"></span>
+    <br>
+    Blocks One Week Since: <input type="date" id="priorityBPHDate">
+    <br>
+    <button id="priorityBPHReload">Reload</button>
+    <script src="prioritybph.js"></script>
+    
+    <!-- <script src="nonprioritybph.js"></script> -->
+
     <!-- <h2>Contracts by Balance</h2>
     <div class="chartContainer">
         <svg id="topContractsAxis" class="axis">
