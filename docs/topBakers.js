@@ -82,8 +82,8 @@ let bakerQuery = async function(limit, date) {
     return result;                                              
 }
 
-bakerQuery(100, Math.round(new Date().getTime()) - 2929746);
+bakerQuery(100, Math.round(new Date().getTime()) - 2929746000);
 
 d3.select("#blockReload").on("click", function() {
-    bakerQuery(document.getElementById("blockNumber").value, new Date(document.getElementById("blockDate").value).getTime());
+    bakerQuery(document.getElementById("number").value, new Date(document.getElementById("blockDate").value).getTime());
 });

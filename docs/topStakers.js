@@ -76,7 +76,3 @@ let stakeQuery = async function(limit) {
 }
 
 stakeQuery(100);
-
-d3.select("#reload").on("click", function() {
-    stakeQuery(document.getElementById("stakeNumber").value);
-});

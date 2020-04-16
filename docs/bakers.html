@@ -12,6 +12,13 @@
     <script src="conseilSetup.js"></script>
 </head>
 <body>
+    <h1>Bakers</h1>
+    Query Limit <input type="number" id="number">
+    <br>
+    <button id="reload">Reload</button>
+    <br>
+    <br>
+
     <a href="index.html"><- Back</a>
     <h2>Top Bakers by Stake</h2>
     <div class="chartContainer">
@@ -20,10 +27,6 @@
         <svg id="topStakers" class="barChart">
         </svg>
     </div>
-    <br>
-    Number of Accounts: <input type="number" id="stakeNumber" value="100">
-    <br>
-    <button id="reload">Reload</button>
     <script src="topStakers.js"></script>
 
     <h2>Top Bakers by Block</h2>
@@ -33,8 +36,6 @@
         <svg id="topBakers" class="barChart">
         </svg>
     </div>
-    <br>
-    Number of Accounts: <input type="number" id="blockNumber" value="100">
     <br>
     Blocks Before: <input type="date" id="blockDate">
     <br>
@@ -49,9 +50,8 @@
         </svg>
     </div>
     <br>
-    Number of Accounts: <input type="number" id="delegateNumber" value="100">
-    <br>
-    <button id="delegateReload">Reload</button>
     <script src="mostDelegated.js"></script>
+
+    <script src="bakerReload.js"></script>
 </body>
 </html>

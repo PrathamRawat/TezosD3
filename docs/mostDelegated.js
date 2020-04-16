@@ -82,7 +82,3 @@ let delegateQuery = async function(limit) {
 }
 
 delegateQuery(100);
-
-d3.select("#delegateReload").on("click", function() {
-    delegateQuery(document.getElementById("delegateNumber").value);
-});
