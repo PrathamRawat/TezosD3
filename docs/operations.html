@@ -32,18 +32,11 @@
     <span id="gphLabel"></span>
     <script src="hourlyGas.js"></script>
 
-    <h2>Contracts by Invocations</h2>
-    <div class="chartContainer">
-        <svg id="topInvokedAxis" class="axis">
-        </svg>
-        <svg id="topInvoked" class="barChart">
-        </svg>
-    </div>
-    Number of Accounts: <input type="number" id="invokedNumber" value="100">
+    <h2>Fees Paid per Hour</h2>
+    <svg id="feesPerHour" class="barChart">
+    </svg>
     <br>
-    Invocations After: <input type="date" id="invokedDate">
-    <br>
-    <button id="invokedReload">Reload</button>
-    <script src="mostInvoked.js"></script>
+    <span id="fphLabel"></span>
+    <script src="hourlyFees.js"></script>
 </body>
 </html>
