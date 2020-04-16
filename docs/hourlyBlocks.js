@@ -128,7 +128,3 @@ now.setMinutes(0, 0, 0);
 now = now.getTime();
 
 bphQuery(now - (3600000 * 168));
-
-d3.select("#bphReload").on("click", function() {
-    bphQuery(new Date(document.getElementById("bphDate").values).getTime());
-});

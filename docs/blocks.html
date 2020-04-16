@@ -12,6 +12,11 @@
     <script src="conseilSetup.js"></script>
 </head>
 <body>
+    <h1>Block Data</h1>
+    Query Blocks One Week Since: <input type="date" id="date">
+    <br>
+    <button id="reload">Reload</button>
+    <br>
     <a href="index.html"><- Back</a>
 
     <h2>Blocks Per Hour</h2>
@@ -19,9 +24,6 @@
     </svg>
     <br>
     <span id="bphLabel"></span>
-    <br>
-    Blocks One Week Since: <input type="date" id="bphDate">
-    <button id="bphReload">Reload</button>
     <script src="hourlyBlocks.js"></script>
 
     <h2>Priority Zero Blocks Per Hour vs. Regular Blocks per Hour</h2>
@@ -31,10 +33,6 @@
     <span id="priorityLabel" style="color: purple"></span>
     <br>
     <span id="nonpriorityLabel" style="color: blue"></span>
-    <br>
-    Blocks One Week Since: <input type="date" id="priorityBPHDate">
-    <br>
-    <button id="priorityBPHReload">Reload</button>
     <script src="prioritybph.js"></script>
 
     <h2>Endorsements per Block</h2>
@@ -45,5 +43,7 @@
     <br>
     <span id="pbeLabel"></span>
     <script src="perBlockEndorsements.js"></script>
+
+    <script src="blockReload.js"></script>
 </body>
 </html>

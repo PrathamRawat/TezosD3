@@ -163,7 +163,3 @@ now.setMinutes(0, 0, 0);
 now = now.getTime();
 
 prioritybphQuery(now - (3600000 * 168));
-
-d3.select("#priorityBPHReload").on("click", function() {
-    prioritybphQuery(new Date(document.getElementById("priorityBPHDate").value).getTime());
-});

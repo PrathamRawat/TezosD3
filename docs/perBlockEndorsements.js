@@ -88,7 +88,7 @@ let pbeQuery = async function(date) {
             .attr("r", 5)
             .attr("fill", "purple")
 
-        readout.html("Block Level " + level + ", " + (endorsements[d - 4]) + " Endorsements")
+        readout.html("Block Level " + level + ", " + (endorsements[d - 14]) + " Endorsements")
     });
 
     return result;                                              
@@ -101,7 +101,3 @@ now.setMinutes(0, 0, 0);
 now = now.getTime();
 
 pbeQuery(now - (3600000 * 168));
-
-d3.select("#bphReload").on("click", function() {
-    pbeQuery(new Date(document.getElementById("bphDate").endorsements).getTime());
-});
