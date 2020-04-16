@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Data</title>
+    <script src="https://d3js.org/d3.v5.min.js" charset="utf-8"></script>
+    <script src="https://cdn.jsdelivr.net/gh/cryptonomic/conseiljs/dist-web/conseiljs.min.js"
+    integrity="sha384-eSd4aru4A1k5ejohBE9T8uPo4P1TT6TTdnuO71HrrNr0pmZaF+C5/YQyYv0JNqhV"
+    crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="stylesheet.css">
+    <script src="conseilSetup.js"></script>
+</head>
+<body>
+    <h1>Operations</h1>
+    <a href="index.html"><- Back</a>
+
+    Number of Accounts: <input type="number" id="number" value="100">
+    <button id="reload">Reload</button>
+
+    <h2>Transactions per Hour</h2>
+    <svg id="transactionsPerHour" class="barChart">
+    </svg>
+    <br>
+    <span id="tphLabel"></span>
+    <script src="hourlyTransactions.js"></script>
+
+    <h2>Contracts by Balance</h2>
+    <div class="chartContainer">
+        <svg id="topContractsAxis" class="axis">
+        </svg>
+        <svg id="topContracts" class="barChart">
+        </svg>
+    </div>
+    Number of Accounts: <input type="number" id="contractNumber" value="100">
+    <button id="contractReload">Reload</button>
+    <script src="topContracts.js"></script>
+
+    <h2>Contracts by Invocations</h2>
+    <div class="chartContainer">
+        <svg id="topInvokedAxis" class="axis">
+        </svg>
+        <svg id="topInvoked" class="barChart">
+        </svg>
+    </div>
+    Number of Accounts: <input type="number" id="invokedNumber" value="100">
+    <br>
+    Invocations After: <input type="date" id="invokedDate">
+    <br>
+    <button id="invokedReload">Reload</button>
+    <script src="mostInvoked.js"></script>
+</body>
+</html>
