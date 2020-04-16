@@ -17,9 +17,7 @@ let invokedQuery = async function(limit, date) {
     console.log(result);
 
     data = result.map(function(x) {return x.count_operation_group_hash});
-    accounts = result.map(function(x) {return x.source});
-    
-    console.log(data);
+    contract_source = result.map(function(x) {return x.destination});
     
     // bakerCount = data.map(function(x) {return x[1]});
 
@@ -68,7 +66,7 @@ let invokedQuery = async function(limit, date) {
         .style("left", d3.event.pageX - 50 + "px")
         .style("top", d3.event.pageY - 70 + "px")
         .style("display", "inline-block")
-        .html((d) + " Invocations<br>" + (accounts[i]));
+        .html((d) + " Invocations<br>" + (contract_source[i]));
     })
         .on("mouseout", function(d){ tooltip.style("display", "none");});
 

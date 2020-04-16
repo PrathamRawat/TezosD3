@@ -11,9 +11,9 @@ let accountQuery = async function(limit) {
     // console.log(result);
 
     data = result.map(function(x) {return x.balance / 1000000});
-    accounts = result.map(function(x) {return x.account_id})
+    account_id = result.map(function(x) {return x.account_id})
 
-    // console.log(accounts);
+    // console.log(account_id);
 
     height = 500;
     
@@ -60,7 +60,7 @@ let accountQuery = async function(limit) {
         .style("left", d3.event.pageX - 50 + "px")
         .style("top", d3.event.pageY - 70 + "px")
         .style("display", "inline-block")
-        .html((d) + " XTz<br>" + (accounts[i]));
+        .html((d) + " XTz<br>" + (account_id[i]));
     })
         .on("mouseout", function(d){ tooltip.style("display", "none");});
 
