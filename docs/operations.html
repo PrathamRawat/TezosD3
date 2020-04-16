@@ -25,16 +25,12 @@
     <span id="tphLabel"></span>
     <script src="hourlyTransactions.js"></script>
 
-    <h2>Contracts by Balance</h2>
-    <div class="chartContainer">
-        <svg id="topContractsAxis" class="axis">
-        </svg>
-        <svg id="topContracts" class="barChart">
-        </svg>
-    </div>
-    Number of Accounts: <input type="number" id="contractNumber" value="100">
-    <button id="contractReload">Reload</button>
-    <script src="topContracts.js"></script>
+    <h2>Gas per Hour</h2>
+    <svg id="gasPerHour" class="barChart">
+    </svg>
+    <br>
+    <span id="gphLabel"></span>
+    <script src="hourlyGas.js"></script>
 
     <h2>Contracts by Invocations</h2>
     <div class="chartContainer">
