@@ -77,7 +77,3 @@ let accountQuery = async function(limit) {
 }
 
 accountQuery(100);
-
-d3.select("#accountsReload").on("click", function() {
-    accountQuery(document.getElementById("accountsNumber").value);
-});

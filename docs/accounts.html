@@ -12,6 +12,13 @@
     <script src="conseilSetup.js"></script>
 </head>
 <body>
+    <h1>Account Data</h1>
+    <br>
+    Query Limit <input type="number" id="number">
+    <br>
+    <button id="reload">Reload</button>
+    <br>
+    <br>
     <a href="index.html"><- Back</a>
     <h2>Forbes' Top Richest Accounts</h2>
     <div class="chartContainer">
@@ -20,8 +27,6 @@
         <svg id="topAccounts" class="barChart">
         </svg>
     </div>
-    Number of Accounts: <input type="number" id="accountsNumber" value="100">
-    <button id="accountsReload">Reload</button>
     <script src="topAccounts.js"></script>
 
     <h2>Contracts by Balance</h2>
@@ -31,8 +36,6 @@
         <svg id="topContracts" class="barChart">
         </svg>
     </div>
-    Number of Accounts: <input type="number" id="contractNumber" value="100">
-    <button id="contractReload">Reload</button>
     <script src="topContracts.js"></script>
 
     <h2>Contracts by Invocations</h2>
@@ -42,11 +45,11 @@
         <svg id="topInvoked" class="barChart">
         </svg>
     </div>
-    Number of Accounts: <input type="number" id="invokedNumber" value="100">
-    <br>
     Invocations After: <input type="date" id="invokedDate">
     <br>
     <button id="invokedReload">Reload</button>
     <script src="mostInvoked.js"></script>
+
+    <script src="accountReload.js"></script>
 </body>
 </html>

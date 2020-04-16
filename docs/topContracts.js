@@ -78,7 +78,3 @@ let contractQuery = async function(limit) {
 }
 
 contractQuery(100);
-
-d3.select("#contractReload").on("click", function() {
-    contractQuery(document.getElementById("contractNumber").value);
-});

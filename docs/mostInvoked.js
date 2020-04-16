@@ -87,5 +87,5 @@ let invokedQuery = async function(limit, date) {
 invokedQuery(100, Math.round(new Date().getTime()) - 2929746000);
 
 d3.select("#invokedReload").on("click", function() {
-    delegateQuery(document.getElementById("invokedNumber").value, new Date(document.getElementById("invokedDate").value));
+    invokedQuery(document.getElementById("invokedNumber").value, new Date(document.getElementById("invokedDate").value));
 });
