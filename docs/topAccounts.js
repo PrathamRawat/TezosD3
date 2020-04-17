@@ -14,7 +14,7 @@ let accountQuery = async function(limit) {
 
     graphAxis = d3.select("#topAccountsAxis");
 
-    seperateAxisDynamicBarChartGenerator(500, 25, graphSVG, graphAxis, result, "account_id", "balance", true);
+    seperateAxisDynamicBarChartGenerator(500, 25, graphSVG, graphAxis, result, "account_id", "balance");
 
     return result;
 }

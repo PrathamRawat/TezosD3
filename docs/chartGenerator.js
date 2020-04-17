@@ -1,6 +1,6 @@
 
 
-const seperateAxisStaticBarChartGenerator = function(height, width, graphSVGElement, axisSVGElement, queryResult, xAxisKey, yAxisKey, staticSVG) {
+const seperateAxisStaticBarChartGenerator = function(height, width, graphSVGElement, axisSVGElement, queryResult, xAxisKey, yAxisKey) {
     
     // Create an Array for each Axis
     xAxisData = queryResult.map(d => d[xAxisKey]);
@@ -81,7 +81,7 @@ const seperateAxisStaticBarChartGenerator = function(height, width, graphSVGElem
     });
 }
 
-const seperateAxisDynamicBarChartGenerator = function(height, barWidth, graphSVGElement, axisSVGElement, queryResult, xAxisKey, yAxisKey, staticSVG) {
+const seperateAxisDynamicBarChartGenerator = function(height, barWidth, graphSVGElement, axisSVGElement, queryResult, xAxisKey, yAxisKey) {
     
     // Create an Array for each Axis
     xAxisData = queryResult.map(d => d[xAxisKey]);

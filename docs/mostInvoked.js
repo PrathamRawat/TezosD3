@@ -20,8 +20,8 @@ let invokedQuery = async function(limit, date) {
 
     graphAxis = d3.select("#topInvokedAxis");
 
-    seperateAxisDynamicBarChartGenerator(500, 25, graphSVG, graphAxis, result, "destination", "count_operation_group_hash", true);
-    
+    seperateAxisDynamicBarChartGenerator(500, 25, graphSVG, graphAxis, result, "destination", "count_operation_group_hash");
+
     return result;                                              
 }
 
