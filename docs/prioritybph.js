@@ -10,6 +10,8 @@ let prioritybphQuery = async function(date) {
 
     const result = await conseiljs.ConseilDataClient.executeEntityQuery(conseilServer, 'tezos', conseilServer.network, 'blocks', query);
 
+    d3.select("#priorityBlocksPerHourLink").attr("href", shareReport("mainnet", "blocks", query))
+
     query = conseiljs.ConseilQueryBuilder.blankQuery();
     query = conseiljs.ConseilQueryBuilder.addFields(query, 'hash');
     query = conseiljs.ConseilQueryBuilder.addFields(query, 'timestamp');

@@ -10,6 +10,8 @@ let opdQuery = async function(date) {
 
     const result = await conseiljs.ConseilDataClient.executeEntityQuery(conseilServer, 'tezos', conseilServer.network, 'operations', query);
 
+    d3.select("#originationsPerDayLink").attr("href", shareReport("mainnet", "operations", query))
+
     // console.log(result);
 
     label = [];

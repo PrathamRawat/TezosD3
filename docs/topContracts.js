@@ -9,6 +9,8 @@ let contractQuery = async function(limit) {
 
     const result = await conseiljs.ConseilDataClient.executeEntityQuery(conseilServer, 'tezos', conseilServer.network, 'accounts', query);
 
+    d3.select("#topContractsLink").attr("href", shareReport("mainnet", "accounts", query))
+
     // console.log(result);
 
     data = result.map(function(x) {return x.balance / 1000000});

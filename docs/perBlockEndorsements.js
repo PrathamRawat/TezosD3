@@ -11,6 +11,8 @@ let pbeQuery = async function(date) {
 
     const result = await conseiljs.ConseilDataClient.executeEntityQuery(conseilServer, 'tezos', conseilServer.network, 'operations', query);
 
+    d3.select("#perBlockEndorsementsLink").attr("href", shareReport("mainnet", "operations", query))
+
     // console.log(result);
 
     blklevel = result.map(d => d.block_level);

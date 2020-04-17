@@ -11,6 +11,8 @@ let bakerQuery = async function(limit, date) {
 
     const result = await conseiljs.ConseilDataClient.executeEntityQuery(conseilServer, 'tezos', conseilServer.network, 'blocks', query);
 
+    d3.select("#topBakersLink").attr("href", shareReport("mainnet", "blocks", query))
+
     console.log(result);
 
     data = result.map(function(x) {return x.count_hash});

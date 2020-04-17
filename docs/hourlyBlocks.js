@@ -9,6 +9,8 @@ let bphQuery = async function(date) {
 
     const result = await conseiljs.ConseilDataClient.executeEntityQuery(conseilServer, 'tezos', conseilServer.network, 'blocks', query);
 
+    d3.select("#blocksPerHourLink").attr("href", shareReport("mainnet", "blocks", query))
+
     console.log(result);
 
     label = [];

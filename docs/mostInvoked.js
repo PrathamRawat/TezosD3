@@ -14,6 +14,8 @@ let invokedQuery = async function(limit, date) {
 
     const result = await conseiljs.ConseilDataClient.executeEntityQuery(conseilServer, 'tezos', conseilServer.network, 'operations', query);
 
+    d3.select("#mostInvokedLink").attr("href", shareReport("mainnet", "operations", query))
+
     console.log(result);
 
     data = result.map(function(x) {return x.count_operation_group_hash});
