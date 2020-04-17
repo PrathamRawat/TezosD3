@@ -33,12 +33,12 @@
     font-family: sans-serif;
 }
 .axis {
-    width: 60px;
+    width: 100px;
     background-color: lavender;
     padding: 5px;
     height: 500px;
     border-color: lavender;
     border-style: solid;
-    border-left-width: 25px;
+    /* border-left-width: 25px; */
     position: absolute;
 }
