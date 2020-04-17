@@ -2,6 +2,10 @@
 
 const seperateAxisStaticBarChartGenerator = function(height, width, graphSVGElement, axisSVGElement, queryResult, xAxisKey, yAxisKey) {
     
+    // Clear SVG Elements of old data
+    graphSVGElement.selectAll("*").remove();
+    axisSVGElement.selectAll("*").remove();
+
     // Create an Array for each Axis
     xAxisData = queryResult.map(d => d[xAxisKey]);
     yAxisData = queryResult.map(d => d[yAxisKey]);
@@ -83,6 +87,10 @@ const seperateAxisStaticBarChartGenerator = function(height, width, graphSVGElem
 
 const seperateAxisDynamicBarChartGenerator = function(height, barWidth, graphSVGElement, axisSVGElement, queryResult, xAxisKey, yAxisKey) {
     
+    // Clear SVG Elements of old data
+    graphSVGElement.selectAll("*").remove();
+    axisSVGElement.selectAll("*").remove();
+
     // Create an Array for each Axis
     xAxisData = queryResult.map(d => d[xAxisKey]);
     yAxisData = queryResult.map(d => parseInt(d[yAxisKey]));
