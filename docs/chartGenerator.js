@@ -1,5 +1,4 @@
 
-
 const seperateAxisStaticBarChartGenerator = function(height, width, graphSVGElement, axisSVGElement, queryResult, xAxisKey, yAxisKey) {
     
     // Clear SVG Elements of old data
@@ -170,3 +169,166 @@ const seperateAxisDynamicBarChartGenerator = function(height, barWidth, graphSVG
         .on("mouseout", function(d){ tooltip.style("display", "none");
     });
 }
+
+const temporalLineGraphGenerator = function(height, width, graphSVGElement, labelElement, queryResult, xAxisKey, yAxisKey, yScale = null, color = "purple") {
+
+    // Parse out data from query input
+    xAxisData = queryResult.map(d => d[xAxisKey]);
+    yAxisData = queryResult.map(d => d[yAxisKey]);
+
+    // If yScale is provided by the user, to stack line graphs on each other
+    if(yScale == null) {
+        // Create D3 Scale for Y Axis
+        yScale = d3.scaleLinear()
+            .domain([d3.min(yAxisData), d3.max(yAxisData) + 5])
+            .range([0, height]);
+
+        // Create D3 Scale for Y Axis Label
+        yAxisScale = d3.scaleLinear()
+            .domain([d3.min(yAxisData), d3.max(yAxisData) + 5])
+            .range([0, -height]);
+
+        // Set Up Y-Axis Label
+        const yAxis = d3.axisLeft()
+            .scale(yAxisScale);
+
+        // Attach Y-Axis Label to Chart
+        svg.append("g").attr("transform", "translate(25, 500)").style("color", "black").call(yAxis);
+    }
+
+    // Create D3 Scale for Y Axis Label
+    yAxisScale = d3.scaleLinear()
+        .domain([0, d3.max(yAxisData) + 5])
+        .range([0, -height]);
+
+    // A Temporal Line Graph uses a Time-Based X-Axis
+    xScale = d3.scaleTime()
+        .domain(d3.extent(xAxisData))
+        .range([ 0, width ]);
+
+    // Set up SVG element for graph
+    graphSVGElement
+        .attr("height", height)
+        .attr("width", xScale.range()[1] + 25)
+        .attr("font-family", "sans-serif")
+        .attr("font-size", "10")
+        .attr("text-anchor", "end");
+
+    // // Clear SVG Canvas
+    // graphSVGElement.selectAll("*").remove();
+
+    // Add X-Axis Label
+    graphSVGElement.append("g")
+        .attr("transform", "translate(25," + (height - 25) + ")")
+        .style("color", "black")
+        .call(d3.axisBottom(xScale));
+
+    // Add line for line graph
+    svg.append("path")
+        .datum(queryResult)
+        .attr("fill", "none")
+        .attr("stroke", color)
+        .attr("stroke-width", 2)
+        .attr("d", d3.line()
+            .x(function(d) { return xScale(d[xAxisKey]) })
+            .y(function(d) { return yScale(d[yAxisKey]) }))
+        .attr("transform", "translate(25, 500),scale(1, -1)")
+
+    dot = svg.append("circle")
+
+    svg.on("mousemove", function() {
+        date = xScale.invert(d3.event.clientX - d3.event.target.getBoundingClientRect().left) 
+        date.setHours(date.getHours() + Math.round(date.getMinutes()/60.0));
+        date.setMinutes(0, 0, 0);
+        
+        d = xAxisData.indexOf(date.getTime());
+
+        dot
+            .attr("cx", xScale(date.getTime()) - 3)
+            .attr("cy", 500 - yScale(values[d - 4]))
+            .attr("r", 5)
+            .attr("fill", color)
+
+        labelElement.html("Date: " + date.toString() + " <br>Value: " + (values[d - 4]))
+    });
+
+    return yScale;
+} 
+
+const nonTemporalLineGraphGenerator = function(height, width, graphSVGElement, labelElement, queryResult, xAxisKey, yAxisKey, yScale = null, color = "purple") {
+
+    // Parse out data from query input
+    xAxisData = queryResult.map(d => parseInt(d[xAxisKey]));
+    yAxisData = queryResult.map(d => parseInt(d[yAxisKey]));    
+
+    // If yScale is provided by the user, to stack line graphs on each other
+    if(yScale == null) {
+        // Create D3 Scale for Y Axis
+        yScale = d3.scaleLinear()
+            .domain([d3.min(yAxisData), d3.max(yAxisData) + 5])
+            .range([0, height]);
+
+        // Create D3 Scale for Y Axis Label
+        yAxisScale = d3.scaleLinear()
+            .domain([d3.min(yAxisData), d3.max(yAxisData) + 5])
+            .range([0, -height]);
+
+        // Set Up Y-Axis Label
+        const yAxis = d3.axisLeft()
+            .scale(yAxisScale);
+
+        // Attach Y-Axis Label to Chart
+        svg.append("g").attr("transform", "translate(25, 500)").style("color", "black").call(yAxis);
+    }
+
+    // A Non-Temporal Line Graph uses a regular, linearly scaled X-Axis
+    xScale = d3.scaleLinear()
+        .domain([d3.min(xAxisData), d3.max(xAxisData)])
+        .range([0, width]);
+
+    // Set up SVG element for graph
+    graphSVGElement
+        .attr("height", height)
+        .attr("width", xScale.range()[1] + 25)
+        .attr("font-family", "sans-serif")
+        .attr("font-size", "10")
+        .attr("text-anchor", "end");
+
+    // // Clear SVG Canvas
+    // graphSVGElement.selectAll("*").remove();
+
+    // Add X-Axis Label
+    graphSVGElement.append("g")
+        .attr("transform", "translate(25," + (height - 25) + ")")
+        .style("color", "black")
+        .call(d3.axisBottom(xScale));
+
+    // Add line for line graph
+    svg.append("path")
+        .datum(queryResult)
+        .attr("fill", "none")
+        .attr("stroke", color)
+        .attr("stroke-width", 2)
+        .attr("d", d3.line()
+            .x(function(d) { return xScale(d[xAxisKey]) })
+            .y(function(d) { return yScale(d[yAxisKey]) }))
+        .attr("transform", "translate(25, 500),scale(1, -1)");
+
+    dot = svg.append("circle");
+
+    svg.on("mousemove", function() {
+        xValue = xScale.invert(d3.event.clientX - d3.event.target.getBoundingClientRect().left);
+
+        d = xAxisData.indexOf(Math.round(xValue));
+
+        dot
+            .attr("cx", xScale(xValue) - 3)
+            .attr("cy", 500 - yScale(yAxisData[d - 4]))
+            .attr("r", 5)
+            .attr("fill", color);
+
+        labelElement.html(xValue + " " + (yAxisData[d - 4]));
+    });
+
+    return yScale;
+} 
