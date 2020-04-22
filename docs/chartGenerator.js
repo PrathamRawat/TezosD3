@@ -68,20 +68,6 @@ const seperateAxisStaticBarChartGenerator = function(height, width, graphSVGElem
             .attr("transform", "translate(100, 500)")
             .style("color", "black")
             .call(yAxis);
-    
-    // Set up tooltip for graph data viewing
-    const tooltip = d3.select("body").append("div").attr("class", "toolTip");
-
-    // Add event listener for tooltip
-    bar.on("mousemove", function(d, i){
-        tooltip
-            .style("left", d3.event.pageX - 50 + "px")
-            .style("top", d3.event.pageY - 70 + "px")
-            .style("display", "inline-block")
-            .html((d) + "<br>" + (xAxisData[i]));
-    })
-        .on("mouseout", function(d){ tooltip.style("display", "none");
-    });
 }
 
 const seperateAxisDynamicBarChartGenerator = function(height, barWidth, graphSVGElement, axisSVGElement, queryResult, xAxisKey, yAxisKey) {
@@ -154,6 +140,12 @@ const seperateAxisDynamicBarChartGenerator = function(height, barWidth, graphSVG
             .attr("transform", "translate(100, 500)")
             .style("color", "black")
             .call(yAxis);
+}
+
+const barGraphFloatingTooltipGenerator = function(graphSVGElement, xLabelFunction, yLabelFunction) {
+    
+    //Select all bar graph bar elements
+    const bar = graphSVGElement.selectAll("g")
     
     // Set up tooltip for graph data viewing
     const tooltip = d3.select("body").append("div").attr("class", "toolTip");
@@ -164,7 +156,7 @@ const seperateAxisDynamicBarChartGenerator = function(height, barWidth, graphSVG
             .style("left", d3.event.pageX - 50 + "px")
             .style("top", d3.event.pageY - 70 + "px")
             .style("display", "inline-block")
-            .html((d) + "<br>" + (xAxisData[i]));
+            .html(yLabelFunction(d, i) + "<br>" + xLabelFunction(d, i));
     })
         .on("mouseout", function(d){ tooltip.style("display", "none");
     });

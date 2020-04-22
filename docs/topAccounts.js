@@ -16,6 +16,16 @@ let accountQuery = async function(limit) {
 
     seperateAxisDynamicBarChartGenerator(500, 25, graphSVG, graphAxis, result, "account_id", "balance");
 
+    xTooltip = function(d, i) {
+        return result[i].account_id
+    }
+
+    yTooltip = function(d, i) {
+        return d + " ꜩ"
+    }
+
+    barGraphFloatingTooltipGenerator(graphSVG, xTooltip, yTooltip)
+
     return result;
 }
 

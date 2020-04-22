@@ -22,6 +22,16 @@ let invokedQuery = async function(limit, date) {
 
     seperateAxisDynamicBarChartGenerator(500, 25, graphSVG, graphAxis, result, "destination", "count_operation_group_hash");
 
+    xTooltip = function(d, i) {
+        return result[i].destination
+    }
+
+    yTooltip = function(d, i) {
+        return d + " Invocations"
+    }
+
+    barGraphFloatingTooltipGenerator(graphSVG, xTooltip, yTooltip)
+
     return result;                                              
 }
 
