@@ -25,7 +25,7 @@ const seperateAxisStaticBarChartGenerator = function(height, width, graphSVGElem
     // Here, the width parameter is treated as the width of each bar in the graph
     xScale = d3.scaleBand()
         .domain(d3.range(xAxisData.length))
-        .range([0, width / xAxisData.length]);
+        .range([0, width]);
 
     // Setup SVG element attributes 
     graphSVGElement
@@ -39,7 +39,7 @@ const seperateAxisStaticBarChartGenerator = function(height, width, graphSVGElem
     const bar = graphSVGElement.selectAll("g")
         .data(yAxisData) //Attach bars to Y-Axis data
         .join("g")
-            .attr("transform", (d, i) => `translate(${xScale(i) + 115}, ${500 - yScale(d)})`);
+            .attr("transform", (d, i) => `translate(${xScale(i) + 115}, ${height - yScale(d)})`);
 
     // Add a rectangle to the bar element
     bar.append("rect")
@@ -65,7 +65,7 @@ const seperateAxisStaticBarChartGenerator = function(height, width, graphSVGElem
     // Attach the axis to the SVG Element
     axisSVGElement
         .append("g")
-            .attr("transform", "translate(100, 500)")
+            .attr("transform", `translate(100, ${height})`)
             .style("color", "black")
             .call(yAxis);
 }
