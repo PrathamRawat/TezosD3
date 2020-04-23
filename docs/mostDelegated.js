@@ -18,6 +18,30 @@ let delegateQuery = async function(limit) {
 
     seperateAxisDynamicBarChartGenerator(500, 25, graphSVG, graphAxis, result, "delegate_value", "count_account_id");
 
+    let getBaker = async function(delegate_value) {
+        let apiData = await fetch("https://api.baking-bad.org/v2/bakers/" + delegate_value)
+        if (apiData.status !== 200) {
+            return delegate_value;
+        }
+        let jsonData = await apiData.json()
+        return bakerNames[delegate_value] = jsonData["name"]
+    }
+
+    bakerNames = {}
+    result.forEach(d => bakerNames[d.delegate_value] = getBaker(d.delegate_value))
+    xTooltip = function(d, i) {
+        if(typeof(bakerNames[result[i].delegate_value]) == "object") {
+            return result[i].delegate_value
+        }
+        return bakerNames[result[i].delegate_value]
+    }
+
+    yTooltip = function(d, i) {
+        return d + " Delegations"
+    }
+
+    barGraphFloatingTooltipGenerator(graphSVG, xTooltip, yTooltip)
+
     return result;                                              
 }
 

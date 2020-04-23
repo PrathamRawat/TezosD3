@@ -19,6 +19,30 @@ let bakerQuery = async function(limit, date) {
 
     seperateAxisDynamicBarChartGenerator(500, 25, graphSVG, graphAxis, result, "baker", "count_hash");
 
+    let getBaker = async function(baker) {
+        let apiData = await fetch("https://api.baking-bad.org/v2/bakers/" + baker)
+        if (apiData.status !== 200) {
+            return baker;
+        }
+        let jsonData = await apiData.json()
+        return bakerNames[baker] = jsonData["name"]
+    }
+
+    bakerNames = {}
+    result.forEach(d => bakerNames[d.baker] = getBaker(d.baker))
+    xTooltip = function(d, i) {
+        if(typeof(bakerNames[result[i].baker]) == "object") {
+            return result[i].baker
+        }
+        return bakerNames[result[i].baker]
+    }
+
+    yTooltip = function(d, i) {
+        return d + " Blocks Baked"
+    }
+
+    barGraphFloatingTooltipGenerator(graphSVG, xTooltip, yTooltip)
+
     return result;                                              
 }
 
