@@ -10,6 +10,7 @@
     crossorigin="anonymous"></script>
     <link rel="stylesheet" href="stylesheet.css">
     <script src="conseilSetup.js"></script>
+    <script src="chartGenerator.js"></script>
 </head>
 <body>
     <h1>Block Data</h1>
@@ -20,26 +21,33 @@
     <a href="index.html"><- Back</a>
 
     <h2>Blocks Per Hour</h2>
-    <svg id="bph" class="barChart">
-    </svg>
-    <br>
-    <span id="bphLabel"></span>
-    <br>
+    <div class="chartContainer">
+        <svg id="bphAxis" class="barChartAxis">
+        </svg>
+        <svg id="bph" class="barChart">
+        </svg>
+    </div>
     <a href="" id="blocksPerHourLink">Link to Query in Arronax</a>
     <script src="hourlyBlocks.js"></script>
 
-    <h2>Priority Zero Blocks Per Hour vs. Regular Blocks per Hour</h2>
-    <svg id="priorityBPH" class="barChart">
+    <h2>Priority Zero Blocks Per Hour</h2>
+    <div class="chartContainer">
+        <svg id="priorityBPHAxis" class="barChartAxis">
+        </svg>
+        <svg id="priorityBPH" class="barChart">
+        </svg>
+    </div>
+    <!-- <svg id="priorityBPH" class="barChart">
     </svg>
     <br>
-    <span id="priorityLabel" style="color: purple"></span>
+    <span id="priorityLabel" style="color: red"></span>
     <br>
     <span id="nonpriorityLabel" style="color: blue"></span>
-    <br>
+    <br> -->
     <a href="" id="priorityBlocksPerHourLink">Link to Query in Arronax</a>
     <script src="prioritybph.js"></script>
 
-    <h2>Endorsements per Block</h2>
+    <h2>Endorsements per Hour</h2>
     <div class="chartContainer">
         <svg id="pbe" class="barChart">
         </svg>

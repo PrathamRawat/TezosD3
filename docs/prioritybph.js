@@ -63,97 +63,32 @@ let prioritybphQuery = async function(date) {
         data2.push({date : label[x].getTime(), value : parseInt(value2[x])});
     }
 
-    console.log(data);
-    console.log(data2);
-    
-    // Remove last value in the case of an unfinished hour
-    value.pop()
-    timestamps.pop()
-    data.pop()
-    label.pop()
-    data2.pop()
-    value2.pop()
+    svg = d3.select("#priorityBPH");
 
-    height = 500;
-    
-    var y = d3.scaleLinear()
-        .domain([0, d3.max(value) + 5])
-        .range([ 0, height]);
+    axis = d3.select("#priorityBPHAxis");
 
-    var yScale = d3.scaleLinear()
-        .domain([0, d3.max(value) + 5])
-        .range([ 0, -height]);
+    // temporalLineGraphGenerator(500, 1200, svg, label, data, "date", "value");
 
-    var x = d3.scaleTime()
-        .domain(d3.extent(data, function(d) { return d.date; }))
-        .range([ 0, 1200 ]);
+    seperateAxisStaticBarChartGenerator(500, 1200, svg, axis, data, "date", "value");
 
-    const svg = d3.select("#priorityBPH")
-        .attr("height", height)
-        .attr("width", x.range()[1] + 25)
-        .attr("font-family", "sans-serif")
-        .attr("font-size", "10")
-        .attr("text-anchor", "end");
+    xTooltip = function(d, i) {
+        return new Date(timestamps[i])
+    }
 
-    svg.selectAll("*").remove();
+    yTooltip = function(d, i) {
+        return d + " Blocks per Hour"
+    }
 
-    svg.append("g")
-        .attr("transform", "translate(25," + (height - 25) + ")")
-        .style("color", "black")
-        .call(d3.axisBottom(x));
+    barGraphFloatingTooltipGenerator(svg, xTooltip, yTooltip)
 
-    svg.append("path")
-        .datum(data)
-        .attr("fill", "none")
-        .attr("stroke", "purple")
-        .attr("stroke-width", 2)
-        .attr("d", d3.line()
-            .x(function(d) { return x(d.date) })
-            .y(function(d) { return y(d.value) }))
-        .attr("transform", "translate(25, 500),scale(1, -1)")
+    // labelOne = d3.select("#priorityLabel");
+    // labelTwo = d3.select("#nonpriorityLabel") 
 
-    svg.append("path")
-        .datum(data2)
-        .attr("fill", "none")
-        .attr("stroke", "blue")
-        .attr("stroke-width", 2)
-        .attr("d", d3.line()
-            .x(function(d) { return x(d.date) })
-            .y(function(d) { return y(d.value) }))
-        .attr("transform", "translate(25, 500),scale(1, -1)")
+    // scale = temporalLineGraphGenerator(500, 1200, svg, labelOne, data, "date", "value", null, color = "red");
 
-    const yAxis = d3.axisLeft()
-                    .scale(yScale);
+    // console.log(typeof(scale));
 
-    svg.append("g").attr("transform", "translate(25, 500)").style("color", "black").call(yAxis);
-
-    dot = svg.append("circle")
-    dot2 = svg.append("circle")
-
-    chartLabel = d3.select("#priorityLabel");
-    chartLabel2 = d3.select("#nonpriorityLabel")
-    svg.on("mousemove", function() {
-        date = x.invert(d3.event.clientX - d3.event.target.getBoundingClientRect().left) 
-        date.setHours(date.getHours() + Math.round(date.getMinutes()/60.0));
-        date.setMinutes(0, 0, 0);
-        
-        d = timestamps.indexOf(date.getTime());
-
-        dot
-            .attr("cx", x(date.getTime()) - 3)
-            .attr("cy", 500 - y(value[d - 4]))
-            .attr("r", 5)
-            .attr("fill", "purple")
-
-        dot2
-            .attr("cx", x(date.getTime()) - 3)
-            .attr("cy", 500 - y(value2[d - 4]))
-            .attr("r", 5)
-            .attr("fill", "blue")
-
-        chartLabel.html(date.toString() + " " + (value[d - 4]) + " Priority Blocks per Hour")
-        chartLabel2.html(date.toString() + " " + (value2[d - 4]) + " Non-Priority Blocks per Hour")
-    });
+    // temporalLineGraphGenerator(500, 1200, svg, labelTwo, data2, "date", "value", yScale = scale, "blue")
 
     return result;                                              
 }
