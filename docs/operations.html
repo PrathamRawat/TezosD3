@@ -10,6 +10,7 @@
     crossorigin="anonymous"></script>
     <link rel="stylesheet" href="stylesheet.css">
     <script src="conseilSetup.js"></script>
+    <script src="chartGenerator.js"></script>
 </head>
 <body>
     <h1>Operations</h1>
@@ -24,46 +25,56 @@
     <a href="index.html"><- Back</a>
 
     <h2>Transactions per Hour</h2>
-    <svg id="transactionsPerHour" class="barChart">
-    </svg>
-    <br>
-    <span id="tphLabel"></span>
+    <div class="chartContainer">
+        <svg id="tphAxis" class="barChartAxis">
+        </svg>
+        <svg id="transactionsPerHour" class="barChart">
+        </svg>
+    </div>
     <br>
     <a href="" id="transactionsPerHourLink">Link to Query in Arronax</a>
     <script src="hourlyTransactions.js"></script>
 
     <h2>Gas per Hour</h2>
-    <svg id="gasPerHour" class="barChart">
-    </svg>
-    <br>
-    <span id="gphLabel"></span>
+    <div class="chartContainer">
+        <svg id="gphAxis" class="barChartAxis">
+        </svg>
+        <svg id="gasPerHour" class="barChart">
+        </svg>
+    </div>
     <br>
     <a href="" id="gasPerHourLink">Link to Query in Arronax</a>
     <script src="hourlyGas.js"></script>
 
     <h2>Fees Paid per Hour</h2>
-    <svg id="feesPerHour" class="barChart">
-    </svg>
-    <br>
-    <span id="fphLabel"></span>
+    <div class="chartContainer">
+        <svg id="fphAxis" class="barChartAxis">
+        </svg>
+        <svg id="feesPerHour" class="barChart">
+        </svg>
+    </div>
     <br>
     <a href="" id="feesPerHourLink">Link to Query in Arronax</a>
     <script src="hourlyFees.js"></script>
 
     <h2>Activations per Day</h2>
-    <svg id="activationsPerDay" class="barChart">
-    </svg>
-    <br>
-    <span id="apdLabel"></span>
+    <div class="chartContainer">
+        <svg id="apdAxis" class="barChartAxis">
+        </svg>
+        <svg id="activationsPerDay" class="barChart">
+        </svg>
+    </div>
     <br>
     <a href="" id="activationsPerDayLink">Link to Query in Arronax</a>
     <script src="dailyActivations.js"></script>
 
     <h2>Originations per Day</h2>
-    <svg id="originationsPerDay" class="barChart">
-    </svg>
-    <br>
-    <span id="opdLabel"></span>
+    <div class="chartContainer">
+        <svg id="opdAxis" class="barChartAxis">
+        </svg>
+        <svg id="originationsPerDay" class="barChart">
+        </svg>
+    </div>
     <br>
     <a href="" id="originationsPerDayLink">Link to Query in Arronax</a>
     <script src="dailyOriginations.js"></script>

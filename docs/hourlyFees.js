@@ -42,75 +42,21 @@ let fphQuery = async function(date) {
         data.push({date : label[x].getTime(), values : parseInt(fees[x])});
     }
 
-    console.log(data);
-    
-    fees.pop()
-    timestamps.pop()
-    data.pop()
-    label.pop()
+    svg = d3.select("#feesPerHour");
 
-    height = 500;
-    
+    axis = d3.select("#fphAxis");
 
-    var y = d3.scaleLinear()
-      .domain([0, d3.max(fees) + 5])
-      .range([ 25, height ]);
+    seperateAxisStaticBarChartGenerator(500, 1200, svg, axis, data, "date", "values");
 
-    var yScale = d3.scaleLinear()
-      .domain([0, d3.max(fees) + 5])
-      .range([ -25, -height]);
+    xTooltip = function(d, i) {
+        return new Date(timestamps[i])
+    }
 
-    var x = d3.scaleTime()
-        .domain(d3.extent(data, function(d) { return d.date; }))
-        .range([ 0, 1200 ]);
+    yTooltip = function(d, i) {
+        return d + " Fees Paid per Hour"
+    }
 
-    const svg = d3.select("#feesPerHour")
-        .attr("height", height)
-        .attr("width", x.range()[1] + 25)
-        .attr("font-family", "sans-serif")
-        .attr("font-size", "10")
-        .attr("text-anchor", "end");
-
-    svg.selectAll("*").remove();
-
-    svg.append("g")
-        .attr("transform", "translate(40," + (height - 25) + ")")
-        .style("color", "black")
-        .call(d3.axisBottom(x));
-
-    svg.append("path")
-        .datum(data)
-        .attr("fill", "none")
-        .attr("stroke", "purple")
-        .attr("stroke-width", 2)
-        .attr("d", d3.line()
-            .x(function(d) { return x(d.date) })
-            .y(function(d) { return y(d.values) }))
-        .attr("transform", "translate(40, 500),scale(1, -1)")
-
-    const yAxis = d3.axisLeft()
-                    .scale(yScale);
-
-    svg.append("g").attr("transform", "translate(40, 500)").style("color", "black").call(yAxis);
-
-    circle = svg.append("circle")
-
-    banner = d3.select("#fphLabel");
-    svg.on("mousemove", function() {
-        date = x.invert(d3.event.clientX - d3.event.target.getBoundingClientRect().left) 
-        date.setHours(date.getHours() + Math.round(date.getMinutes()/60.0));
-        date.setMinutes(0, 0, 0);
-        
-        d = timestamps.indexOf(date.getTime());
-
-        circle
-            .attr("cx", x(date.getTime()) - 3)
-            .attr("cy", 500 - y(fees[d - 6]))
-            .attr("r", 5)
-            .attr("fill", "purple")
-
-        banner.html(date.toString() + " " + (fees[d - 6]) + "µxTz in Fees Paid per Hour")
-    });
+    barGraphFloatingTooltipGenerator(svg, xTooltip, yTooltip)
 
     return result;                                              
 }
