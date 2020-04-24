@@ -4,7 +4,7 @@ let pbeQuery = async function(date) {
     query = conseiljs.ConseilQueryBuilder.addFields(query, 'kind');
     query = conseiljs.ConseilQueryBuilder.addFields(query, 'timestamp');
     // query = conseiljs.ConseilQueryBuilder.addFields(query, 'block_level');
-    query = conseiljs.ConseilQueryBuilder.addPredicate(query, 'timestamp', conseiljs.ConseilOperator.BETWEEN, [date, date + (3600000 * 168)]);
+    query = conseiljs.ConseilQueryBuilder.addPredicate(query, 'timestamp', conseiljs.ConseilOperator.BETWEEN, [date, new Date().getTime()]);
     query = conseiljs.ConseilQueryBuilder.addPredicate(query, 'kind', conseiljs.ConseilOperator.EQ, ['endorsement']);
     query = conseiljs.ConseilQueryBuilder.addAggregationFunction(query, 'kind', conseiljs.ConseilFunction.count);
     query = conseiljs.ConseilQueryBuilder.addOrdering(query, "timestamp", conseiljs.ConseilSortDirection.ASC);
@@ -21,7 +21,7 @@ let pbeQuery = async function(date) {
     values = [];
     data = [];
 
-    now = date + (3600000 * 168);
+    now = new Date().getTime();
 
     for(var time = new Date(date).getTime(); time < now; time += 3600000) {
         label.push(new Date(time));

@@ -3,7 +3,7 @@ let bphQuery = async function(date) {
     let query = conseiljs.ConseilQueryBuilder.blankQuery();
     query = conseiljs.ConseilQueryBuilder.addFields(query, 'hash');
     query = conseiljs.ConseilQueryBuilder.addFields(query, 'timestamp');
-    query = conseiljs.ConseilQueryBuilder.addPredicate(query, 'timestamp', conseiljs.ConseilOperator.BETWEEN, [date, date + (3600000 * 168)]);
+    query = conseiljs.ConseilQueryBuilder.addPredicate(query, 'timestamp', conseiljs.ConseilOperator.BETWEEN, [date, new Date().getTime()]);
     query = conseiljs.ConseilQueryBuilder.addOrdering(query, "timestamp", conseiljs.ConseilSortDirection.ASC);
     query = conseiljs.ConseilQueryBuilder.setLimit(query, 1000000000);
 
@@ -18,7 +18,7 @@ let bphQuery = async function(date) {
     values = [];
     data = [];
 
-    now = date + (3600000 * 168);
+    now = new Date().getTime();
 
     for(var time = new Date(date).getTime(); time < now; time += 3600000) {
         label.push(new Date(time));
@@ -43,8 +43,6 @@ let bphQuery = async function(date) {
 
     axis = d3.select("#bphAxis");
 
-    label = d3.select("#bphLabel");
-
     // temporalLineGraphGenerator(500, 1200, svg, label, data, "date", "value");
 
     seperateAxisStaticBarChartGenerator(500, 1200, svg, axis, data, "date", "value");
@@ -68,4 +66,4 @@ now.setMinutes(0, 0, 0);
 
 now = now.getTime();
 
-bphQuery(now - (3600000 * 168));
+bphQuery(now - (604800000));

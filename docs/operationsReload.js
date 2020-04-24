@@ -1,7 +1,3 @@
-const clearGraphs = function() {
-    d3.select("svg").selectAll("*").remove();
-}
-
 d3.select("#oneDay").on("click", function() {
     tphQuery(new Date().getTime() - 86400000);
     gphQuery(new Date().getTime() - 86400000);
