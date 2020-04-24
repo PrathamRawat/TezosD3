@@ -8,6 +8,10 @@ let accountQuery = async function(limit) {
 
     const result = await conseiljs.ConseilDataClient.executeEntityQuery(conseilServer, 'tezos', conseilServer.network, 'accounts', query);
 
+    result.forEach(element => {
+        element.balance = element.balance / 1000000.0
+    });
+
     d3.select("#topAccountsLink").attr("href", shareReport("mainnet", "accounts", query))
 
     graphSVG = d3.select("#topAccounts");

@@ -7,6 +7,10 @@ let stakeQuery = async function(limit) {
 
     const result = await conseiljs.ConseilDataClient.executeEntityQuery(conseilServer, 'tezos', conseilServer.network, 'delegates', query);
 
+    result.forEach(element => {
+        element.staking_balance = element.staking_balance / 1000000.0
+    });
+
     d3.select("#topStakersLink").attr("href", shareReport("mainnet", "delegates", query))
 
     graphSVG = d3.select("#topStakers");
