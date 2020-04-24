@@ -4,7 +4,7 @@ let fphQuery = async function(date) {
     query = conseiljs.ConseilQueryBuilder.addFields(query, 'fee');
     query = conseiljs.ConseilQueryBuilder.addFields(query, 'timestamp');
     query = conseiljs.ConseilQueryBuilder.addPredicate(query, 'fee', conseiljs.ConseilOperator.GT, [0]);
-    query = conseiljs.ConseilQueryBuilder.addPredicate(query, 'timestamp', conseiljs.ConseilOperator.BETWEEN, [date, date + (3600000 * 168)]);
+    query = conseiljs.ConseilQueryBuilder.addPredicate(query, 'timestamp', conseiljs.ConseilOperator.BETWEEN, [date, new Date().getTime()]);
     query = conseiljs.ConseilQueryBuilder.addOrdering(query, "timestamp", conseiljs.ConseilSortDirection.ASC);
     query = conseiljs.ConseilQueryBuilder.setLimit(query, 1000000000);
 
@@ -19,7 +19,7 @@ let fphQuery = async function(date) {
     fees = [];
     data = [];
 
-    now = date + (3600000 * 168);
+    now = new Date().getTime()
 
     for(var time = new Date(date).getTime(); time < now; time += 3600000) {
         label.push(new Date(time));

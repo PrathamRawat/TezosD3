@@ -4,7 +4,7 @@ let opdQuery = async function(date) {
     query = conseiljs.ConseilQueryBuilder.addFields(query, 'kind');
     query = conseiljs.ConseilQueryBuilder.addFields(query, 'timestamp');
     query = conseiljs.ConseilQueryBuilder.addPredicate(query, 'kind', conseiljs.ConseilOperator.EQ, ['origination']);
-    query = conseiljs.ConseilQueryBuilder.addPredicate(query, 'timestamp', conseiljs.ConseilOperator.BETWEEN, [date, date + (86400000 * 365)]);
+    query = conseiljs.ConseilQueryBuilder.addPredicate(query, 'timestamp', conseiljs.ConseilOperator.BETWEEN, [date, new Date().getTime()]);
     query = conseiljs.ConseilQueryBuilder.addOrdering(query, "timestamp", conseiljs.ConseilSortDirection.ASC);
     query = conseiljs.ConseilQueryBuilder.setLimit(query, 1000000000);
 
@@ -19,7 +19,7 @@ let opdQuery = async function(date) {
     originations = [];
     data = [];
 
-    now = date + (86400000 * 365);
+    now = new Date().getTime()
 
     // now = new Date().getTime()
     // start = new Date(date)
