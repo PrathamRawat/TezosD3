@@ -25,3 +25,10 @@ d3.select("#oneYear").on("click", function() {
     pbeQuery(new Date().getTime() - 31556952000);
     bphQuery(new Date().getTime() - 31556952000);
 });
+
+d3.select("#allTime").on("click", function() {
+    clearGraphs()
+    prioritybphQuery(1530316800);
+    pbeQuery(1530316800);
+    bphQuery(1530316800);
+});
