@@ -40,21 +40,21 @@ let fphQuery = async function(date) {
     }  
 
     for(var x = 0; x < fees.length; x++) {
-        data.push({date : label[x].getTime(), values : parseInt(fees[x])});
+        data.push({date : label[x].getTime(), values : parseInt(fees[x] / 1000000)});
     }
 
     svg = d3.select("#feesPerHour");
 
     axis = d3.select("#fphAxis");
 
-    seperateAxisStaticBarChartGenerator(500, 1200, svg, axis, data, "date", "values");
+    seperateAxisPrioritizedBarChartGenerator(500, 1200, svg, axis, data, "date", "values");
 
     xTooltip = function(d, i) {
         return new Date(timestamps[i])
     }
 
     yTooltip = function(d, i) {
-        return d + " Fees Paid per Hour"
+        return d + " ꜩ in Fees Paid per Hour"
     }
 
     barGraphFloatingTooltipGenerator(svg, xTooltip, yTooltip)

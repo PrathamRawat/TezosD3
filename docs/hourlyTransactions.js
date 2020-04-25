@@ -47,7 +47,7 @@ let tphQuery = async function(date) {
 
     axis = d3.select("#tphAxis");
 
-    seperateAxisStaticBarChartGenerator(500, 1200, svg, axis, data, "date", "values");
+    seperateAxisPrioritizedBarChartGenerator(500, 1200, svg, axis, data, "date", "values");
 
     xTooltip = function(d, i) {
         return new Date(timestamps[i])
