@@ -5,6 +5,7 @@ let fphQuery = async function(date) {
     query = conseiljs.ConseilQueryBuilder.addFields(query, 'timestamp');
     query = conseiljs.ConseilQueryBuilder.addPredicate(query, 'fee', conseiljs.ConseilOperator.GT, [0]);
     query = conseiljs.ConseilQueryBuilder.addPredicate(query, 'timestamp', conseiljs.ConseilOperator.BETWEEN, [date, new Date().getTime()]);
+    query = conseiljs.ConseilQueryBuilder.addAggregationFunction(query, 'fee', conseiljs.ConseilFunction.sum);
     query = conseiljs.ConseilQueryBuilder.addOrdering(query, "timestamp", conseiljs.ConseilSortDirection.ASC);
     query = conseiljs.ConseilQueryBuilder.setLimit(query, 1000000000);
 
@@ -32,7 +33,7 @@ let fphQuery = async function(date) {
     for(var r = 0; r < result.length; r++) {
         for(var t = label.length - 1; t > 0; t--) {
             if(parseInt(result[r].timestamp) > parseInt(label[t].getTime())) {
-                fees[t] += result[r].fee;
+                fees[t] += parseInt(result[r].sum_fee);
                 break;
             }
         }

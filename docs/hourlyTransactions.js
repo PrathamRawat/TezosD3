@@ -5,6 +5,7 @@ let tphQuery = async function(date) {
     query = conseiljs.ConseilQueryBuilder.addFields(query, 'timestamp');
     query = conseiljs.ConseilQueryBuilder.addPredicate(query, 'kind', conseiljs.ConseilOperator.EQ, ['transaction']);
     query = conseiljs.ConseilQueryBuilder.addPredicate(query, 'timestamp', conseiljs.ConseilOperator.BETWEEN, [date, new Date().getTime()]);
+    query = conseiljs.ConseilQueryBuilder.addAggregationFunction(query, 'kind', conseiljs.ConseilFunction.count);
     query = conseiljs.ConseilQueryBuilder.addOrdering(query, "timestamp", conseiljs.ConseilSortDirection.ASC);
     query = conseiljs.ConseilQueryBuilder.setLimit(query, 1000000000);
 
@@ -32,7 +33,7 @@ let tphQuery = async function(date) {
     for(var r = 0; r < result.length; r++) {
         for(var t = label.length - 1; t > 0; t--) {
             if(parseInt(result[r].timestamp) > parseInt(label[t].getTime())) {
-                values[t] += 1;
+                values[t] += parseInt(result[r].count_kind);
                 break;
             }
         }

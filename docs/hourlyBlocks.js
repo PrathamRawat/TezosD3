@@ -26,14 +26,20 @@ let bphQuery = async function(date) {
         values.push(0)
     }
     
-    for(var r = 0; r < result.length; r++) {
-        for(var t = label.length - 1; t > 0; t--) {
-            if(parseInt(result[r].timestamp) > parseInt(label[t].getTime())) {
-                values[t] += 1;
-                break;
-            }
+    for(var t = 0; t < label.length; t++) {
+        while(parseInt(result[0].timestamp) < parseInt(label[t].getTime())) {
+            values[t] += 1;
+            result.shift()
         }
-    }  
+    }
+    // for(var r = 0; r < result.length; r++) {
+    //     for(var t = label.length - 1; t > 0; t--) {
+    //         if(parseInt(result[r].timestamp) > parseInt(label[t].getTime())) {
+    //             values[t] += 1;
+    //             break;
+    //         }
+    //     }
+    // }  
 
     for(var x = 0; x < values.length; x++) {
         data.push({date : label[x].getTime(), value : parseInt(values[x])});
