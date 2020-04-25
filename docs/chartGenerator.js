@@ -223,7 +223,7 @@ const temporalLineGraphGenerator = function(height, width, graphSVGElement, labe
         .datum(queryResult)
         .attr("fill", "none")
         .attr("stroke", color)
-        .attr("stroke-width", 2)
+        .attr("stroke-width", 1)
         .attr("d", d3.line()
             .x(function(d) { return xScale(d[xAxisKey]) })
             .y(function(d) { return yScale(d[yAxisKey]) }))
