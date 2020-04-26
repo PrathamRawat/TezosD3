@@ -33,14 +33,14 @@ let fphQuery = async function(date) {
     for(var r = 0; r < result.length; r++) {
         for(var t = label.length - 1; t > 0; t--) {
             if(parseInt(result[r].timestamp) > parseInt(label[t].getTime())) {
-                fees[t] += parseInt(result[r].sum_fee);
+                fees[t] += parseFloat(result[r].sum_fee);
                 break;
             }
         }
     }  
 
     for(var x = 0; x < fees.length; x++) {
-        data.push({date : label[x].getTime(), values : parseInt(fees[x] / 1000000)});
+        data.push({date : label[x].getTime(), values : parseFloat(fees[x] / 1000000.0)});
     }
 
     svg = d3.select("#feesPerHour");
