@@ -1,7 +1,36 @@
 
 let gphQuery = async function(date) {
     let query = conseiljs.ConseilQueryBuilder.blankQuery();
-    query = conseiljs.ConseilQueryBuilder.addFields(query, 'consumed_gas');
+    if(new Date().getTime() - date > 31000000000) {
+        query = conseiljs.ConseilQueryBuilder.addFields(query, 'consumed_gas');
+        query = conseiljs.ConseilQueryBuilder.addFields(query, 'cycle');
+        query = conseiljs.ConseilQueryBuilder.addPredicate(query, 'consumed_gas', conseiljs.ConseilOperator.GT, [0]);
+        query = conseiljs.ConseilQueryBuilder.addPredicate(query, 'timestamp', conseiljs.ConseilOperator.BETWEEN, [date, new Date().getTime()]);
+        query = conseiljs.ConseilQueryBuilder.addAggregationFunction(query, 'consumed_gas', conseiljs.ConseilFunction.sum);
+        query = conseiljs.ConseilQueryBuilder.addOrdering(query, "cycle", conseiljs.ConseilSortDirection.ASC);
+        query = conseiljs.ConseilQueryBuilder.setLimit(query, 1000000000);
+
+        const result = await conseiljs.ConseilDataClient.executeEntityQuery(conseilServer, 'tezos', conseilServer.network, 'operations', query);
+
+        d3.select("#gasPerHourLink").attr("href", shareReport("mainnet", "operations", query))
+
+        svg = d3.select("#gasPerHour");
+
+        axis = d3.select("#gphAxis");
+
+        seperateAxisPrioritizedBarChartGenerator(500, 1200, svg, axis, result, "cycle", "sum_consumed_gas");
+
+        xTooltip = function(d, i) {
+            return "Cycle " + result[i].cycle
+        }
+
+        yTooltip = function(d, i) {
+            return d + " Gas Consumed per Cycle"
+        }
+
+        barGraphFloatingTooltipGenerator(svg, xTooltip, yTooltip)
+    } else {
+        query = conseiljs.ConseilQueryBuilder.addFields(query, 'consumed_gas');
     query = conseiljs.ConseilQueryBuilder.addFields(query, 'timestamp');
     query = conseiljs.ConseilQueryBuilder.addPredicate(query, 'consumed_gas', conseiljs.ConseilOperator.GT, [0]);
     query = conseiljs.ConseilQueryBuilder.addPredicate(query, 'timestamp', conseiljs.ConseilOperator.BETWEEN, [date, new Date().getTime()]);
@@ -58,8 +87,9 @@ let gphQuery = async function(date) {
     }
 
     barGraphFloatingTooltipGenerator(svg, xTooltip, yTooltip)
+    }
 
-    return result;                                              
+    return 6;                                              
 }
 
 now = new Date();
