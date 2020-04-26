@@ -22,7 +22,7 @@ let fphQuery = async function(date) {
         seperateAxisPrioritizedBarChartGenerator(500, 1200, svg, axis, result, "cycle", "sum_fee");
 
         xTooltip = function(d, i) {
-            return "Cycle " + result[i].sum_fee
+            return "Cycle " + result[i].cycle
         }
 
         yTooltip = function(d, i) {
