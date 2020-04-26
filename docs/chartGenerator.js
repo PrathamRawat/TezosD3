@@ -80,8 +80,8 @@ const seperateAxisPrioritizedBarChartGenerator = function(height, width, graphSV
     axisSVGElement.selectAll("*").remove();
 
     // Create an Array for each Axis
-    xAxisData = queryResult.map(d => d[xAxisKey]);
-    yAxisData = queryResult.map(d => d[yAxisKey]);
+    xAxisData = queryResult.map(d => parseFloat(d[xAxisKey]));
+    yAxisData = queryResult.map(d => parseFloat(d[yAxisKey]));
 
     // Create a D3 Linear Scale for the Y-Axis
     yScale = d3.scaleLinear()
