@@ -27,7 +27,7 @@ let bphQuery = async function(date) {
     }
     
     for(var t = 0; t < label.length; t++) {
-        while(parseInt(result[0].timestamp) < parseInt(label[t].getTime())) {
+        while(result.length > 0 && parseInt(result[0].timestamp) < parseInt(label[t].getTime())) {
             values[t] += 1;
             result.shift()
         }
@@ -51,7 +51,7 @@ let bphQuery = async function(date) {
 
     // temporalLineGraphGenerator(500, 1200, svg, label, data, "date", "value");
 
-    seperateAxisStaticBarChartGenerator(500, 1200, svg, axis, data, "date", "value");
+    seperateAxisPrioritizedBarChartGenerator(500, 1200, svg, axis, data, "date", "value");
 
     xTooltip = function(d, i) {
         return new Date(timestamps[i])
