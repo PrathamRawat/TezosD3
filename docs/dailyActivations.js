@@ -5,6 +5,7 @@ let apdQuery = async function(date) {
     query = conseiljs.ConseilQueryBuilder.addFields(query, 'timestamp');
     query = conseiljs.ConseilQueryBuilder.addPredicate(query, 'kind', conseiljs.ConseilOperator.EQ, ['activate_account']);
     query = conseiljs.ConseilQueryBuilder.addPredicate(query, 'timestamp', conseiljs.ConseilOperator.BETWEEN, [date, new Date().getTime()]);
+    query = conseiljs.ConseilQueryBuilder.addAggregationFunction(query, 'kind', conseiljs.ConseilFunction.count);
     query = conseiljs.ConseilQueryBuilder.addOrdering(query, "timestamp", conseiljs.ConseilSortDirection.ASC);
     query = conseiljs.ConseilQueryBuilder.setLimit(query, 1000000000);
 
@@ -38,7 +39,7 @@ let apdQuery = async function(date) {
     for(var r = 0; r < result.length; r++) {
         for(var t = label.length - 1; t > 0; t--) {
             if(parseInt(result[r].timestamp) > parseInt(label[t].getTime())) {
-                activations[t] += 1;
+                activations[t] += parseInt(result[r].count_kind);
                 break;
             }
         }
@@ -52,7 +53,7 @@ let apdQuery = async function(date) {
 
     axis = d3.select("#apdAxis");
 
-    seperateAxisStaticBarChartGenerator(500, 1200, svg, axis, data, "date", "values");
+    seperateAxisPrioritizedBarChartGenerator(500, 1200, svg, axis, data, "date", "values");
 
     xTooltip = function(d, i) {
         return new Date(times[i]).toDateString()
