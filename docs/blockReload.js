@@ -28,7 +28,7 @@ d3.select("#oneYear").on("click", function() {
 
 d3.select("#allTime").on("click", function() {
     clearGraphs()
-    prioritybphQuery(1530316800);
-    pbeQuery(1530316800);
-    bphQuery(1530316800);
+    prioritybphQuery(1530316800000);
+    pbeQuery(1530316800000);
+    bphQuery(1530316800000);
 });

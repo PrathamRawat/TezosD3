@@ -5,6 +5,7 @@ let opdQuery = async function(date) {
     query = conseiljs.ConseilQueryBuilder.addFields(query, 'timestamp');
     query = conseiljs.ConseilQueryBuilder.addPredicate(query, 'kind', conseiljs.ConseilOperator.EQ, ['origination']);
     query = conseiljs.ConseilQueryBuilder.addPredicate(query, 'timestamp', conseiljs.ConseilOperator.BETWEEN, [date, new Date().getTime()]);
+    // query = conseiljs.ConseilQueryBuilder.addAggregationFunction(query, 'kind', conseiljs.ConseilFunction.count);
     query = conseiljs.ConseilQueryBuilder.addOrdering(query, "timestamp", conseiljs.ConseilSortDirection.ASC);
     query = conseiljs.ConseilQueryBuilder.setLimit(query, 1000000000);
 
@@ -12,7 +13,7 @@ let opdQuery = async function(date) {
 
     d3.select("#originationsPerDayLink").attr("href", shareReport("mainnet", "operations", query))
 
-    // console.log(result);
+    console.log(result);
 
     label = [];
     times = [];
@@ -45,7 +46,7 @@ let opdQuery = async function(date) {
     }  
 
     for(var x = 0; x < originations.length; x++) {
-        data.push({date : label[x].getTime(), values : parseInt(originations[x])});
+        data.push({date : parseInt(label[x].getTime()), values : parseInt(originations[x])});
     }
 
     svg = d3.select("#originationsPerDay");

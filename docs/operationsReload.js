@@ -32,10 +32,10 @@ d3.select("#oneYear").on("click", function() {
 });
 
 d3.select("#allTime").on("click", function() {
-    tphQuery(1530316800);
-    vphQuery(1530316800);
-    gphQuery(1530316800);
-    fphQuery(1530316800);
-    apdQuery(1530316800);
-    opdQuery(1530316800);
+    tphQuery(1530316800000);
+    vphQuery(1530316800000);
+    gphQuery(1530316800000);
+    fphQuery(1530316800000);
+    apdQuery(1530316800000);
+    opdQuery(1530316800000);
 });
