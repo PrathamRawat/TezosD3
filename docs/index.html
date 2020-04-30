@@ -6,6 +6,8 @@
         <script src="https://cdn.jsdelivr.net/gh/cryptonomic/conseiljs/dist-web/conseiljs.min.js"
         integrity="sha384-eSd4aru4A1k5ejohBE9T8uPo4P1TT6TTdnuO71HrrNr0pmZaF+C5/YQyYv0JNqhV"
         crossorigin="anonymous"></script>
+        <script src="util/conseilSetup.js"></script>
+        <script src="util/chartGenerator.js"></script>
         <link rel="stylesheet" href="stylesheet.css">
     </head>
     <body>
@@ -18,5 +20,140 @@
         <a href="operations/operations.html">Operations</a>
         <br>
         <a href="blocks/blocks.html">Blocks</a>
+
+        <table>
+            <tr>
+                <td>
+                    <div class="container">
+                        <strong>Blocks per Hour</strong>
+                        <div class="tableDates">
+                            <table id="blocksPerHourDates"><tr>
+                                <td id="oneDay" class="date">One Day</td>
+                                <td id="oneWeek" class="date">One Week</td>
+                                <td id="oneMonth" class="date">One Month</td>
+                                <td id="oneYear" class="date">One Year</td>
+                                <td id="allTime" class="date">All Time</td>
+                            </tr></table>
+                        </div>
+                        <div class="chartContainer">
+                            <svg id="blocksPerHourAxis" class="axis">
+                            </svg>
+                            <svg id="blocksPerHour" class="barChart">
+                            </svg>
+                        </div>
+                        <a href="" id="blocksPerHourLink" class="arronaxLink">View Data</a>
+                    </div>
+                </td>
+                <td>
+                    <div class="container">
+                        <strong>Priority Zero Blocks per Hour</strong>
+                        <div class="tableDates">
+                            <table id="priorityZeroBlocksPerHourDates"><tr>
+                                <td id="oneDay" class="date">One Day</td>
+                                <td id="oneWeek" class="date">One Week</td>
+                                <td id="oneMonth" class="date">One Month</td>
+                                <td id="oneYear" class="date">One Year</td>
+                                <td id="allTime" class="date">All Time</td>
+                            </tr></table>
+                        </div>
+                        <div class="chartContainer">
+                            <svg id="priorityZeroBlocksPerHourAxis" class="axis">
+                            </svg>
+                            <svg id="priorityZeroBlocksPerHour" class="barChart">
+                            </svg>
+                        </div>
+                        <a href="" id="priorityZeroBlocksPerHourLink" class="arronaxLink">View Data</a>
+                    </div>
+                </td>
+                <td>
+                    <div class="container">
+                        <strong>Endorsements per Block</strong>
+                        <div class="tableDates">
+                            <table><tr>
+                                <td id="oneDay" class="date">One Day</td>
+                                <td id="oneWeek" class="date">One Week</td>
+                                <td id="oneMonth" class="date">One Month</td>
+                                <td id="oneYear" class="date">One Year</td>
+                                <td id="allTime" class="date">All Time</td>
+                            </tr></table>
+                        </div>
+                        <div class="chartContainer">
+                            <svg id="endorsementsPerBlockAxis" class="axis">
+                            </svg>
+                            <svg id="endorsementsPerBlock" class="barChart">
+                            </svg>
+                        </div>
+                        <a href="" id="endorsementsPerBlockLink" class="arronaxLink">View Data</a>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="container">
+                        <strong id="transactionsPerHourTitle">Transactions per Hour</strong>
+                        <div class="tableDates">
+                            <table id="transactionsPerHourDates"><tr>
+                                <td id="oneDay" class="date">One Day</td>
+                                <td id="oneWeek" class="date">One Week</td>
+                                <td id="oneMonth" class="date">One Month</td>
+                                <td id="oneYear" class="date">One Year</td>
+                                <td id="allTime" class="date">All Time</td>
+                            </tr></table>
+                        </div>
+                        <div class="chartContainer">
+                            <svg id="transactionsPerHourAxis" class="axis">
+                            </svg>
+                            <svg id="transactionsPerHour" class="barChart">
+                            </svg>
+                        </div>
+                        <a href="" id="transactionsPerHourLink" class="arronaxLink">View Data</a>
+                    </div>
+                </td>
+                <td>
+                    <div class="container">
+                        <strong>Transaction Volume per Hour</strong>
+                        <div class="tableDates">
+                            <table id="transactionVolumePerHourDates"><tr>
+                                <td id="oneDay" class="date">One Day</td>
+                                <td id="oneWeek" class="date">One Week</td>
+                                <td id="oneMonth" class="date">One Month</td>
+                                <td id="oneYear" class="date">One Year</td>
+                                <td id="allTime" class="date">All Time</td>
+                            </tr></table>
+                        </div>
+                        <div class="chartContainer">
+                            <svg id="transactionVolumePerHourAxis" class="axis">
+                            </svg>
+                            <svg id="transactionVolumePerHour" class="barChart">
+                            </svg>
+                        </div>
+                        <a href="" id="transactionVolumePerHourLink" class="arronaxLink">View Data</a>
+                    </div>
+                </td>
+                <td>
+                    <div class="container">
+                        <strong>Gas Spent per Hour</strong>
+                        <div class="tableDates">
+                            <table><tr>
+                                <td id="oneDay" class="date">One Day</td>
+                                <td id="oneWeek" class="date">One Week</td>
+                                <td id="oneMonth" class="date">One Month</td>
+                                <td id="oneYear" class="date">One Year</td>
+                                <td id="allTime" class="date">All Time</td>
+                            </tr></table>
+                        </div>
+                        <div class="chartContainer">
+                            <svg id="gasSpentPerHourAxis" class="axis">
+                            </svg>
+                            <svg id="gasSpentPerHour" class="barChart">
+                            </svg>
+                        </div>
+                        <a href="" id="gasSpentPerHourLink" class="arronaxLink">View Data</a>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    <script src="homepage/homepageGraphs.js"></script>
+    <script src="homepage/dateHandler.js"></script>
     </body>
 </html>

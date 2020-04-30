@@ -162,7 +162,7 @@ const seperateAxisPrioritizedBarChartGenerator = function(height, width, graphSV
             .call(yAxis);
 }
 
-const seperateAxisDynamicBarChartGenerator = function(height, barWidth, graphSVGElement, axisSVGElement, queryResult, xAxisKey, yAxisKey) {
+const seperateAxisDynamicBarChartGenerator = function(height, barWidth, graphSVGElement, axisSVGElement, queryResult, xAxisKey, yAxisKey, axisWidth= 100, barColor = "black") {
     
     // Clear SVG Elements of old data
     graphSVGElement.selectAll("*").remove();
@@ -174,13 +174,13 @@ const seperateAxisDynamicBarChartGenerator = function(height, barWidth, graphSVG
 
     // Create a D3 Linear Scale for the Y-Axis
     yScale = d3.scaleLinear()
-        .domain([0, d3.max(yAxisData)])
+        .domain([0, d3.max(yAxisData) + 5])
         .range([0, height]);    
 
     // Create a D3 Linear Scale for the Y-Axis Label
     // We negate the height here so that the bars are drawn correctly
     yAxisScale = d3.scaleLinear()
-        .domain([0, d3.max(yAxisData)])
+        .domain([0, d3.max(yAxisData) + 5])
         .range([0, -height]);
 
     // Create a D3 Band Scale for the X-Axis
@@ -202,11 +202,11 @@ const seperateAxisDynamicBarChartGenerator = function(height, barWidth, graphSVG
     const bar = graphSVGElement.selectAll("g")
         .data(yAxisData) //Attach bars to Y-Axis data
         .join("g")
-            .attr("transform", (d, i) => `translate(${xScale(i) + 115}, ${500 - yScale(d)})`);
+            .attr("transform", (d, i) => `translate(${xScale(i) + axisWidth + 15}, ${height - yScale(d)})`);
 
     // Add a rectangle to the bar element
     bar.append("rect")
-        .attr("fill", "purple")
+        .attr("fill", barColor)
         .attr("width", xScale.bandwidth() - 1) // Sets a padding of one pixel between bars
         .attr("height", yScale);
     
@@ -223,13 +223,13 @@ const seperateAxisDynamicBarChartGenerator = function(height, barWidth, graphSVG
     // Prepare the Y-Axis Element
     axisSVGElement
         .attr("height", height)
-        // .attr("width", 60)
+        .attr("width", axisWidth)
         .attr("class", "axis");
 
     // Attach the axis to the SVG Element
     axisSVGElement
         .append("g")
-            .attr("transform", "translate(100, 500)")
+            .attr("transform", `translate(${axisWidth}, ${height})`)
             .style("color", "black")
             .call(yAxis);
 }
