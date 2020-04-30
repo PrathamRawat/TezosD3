@@ -121,6 +121,8 @@ let priorityZeroBlocksPerHourQuery = async function(date) {
 let transactionsPerHourQuery = async function(date) {
     let query = conseiljs.ConseilQueryBuilder.blankQuery();
     if(new Date().getTime() - date > 31000000000) {
+        d3.select("#transactionsPerHourTitle").html("Transactions per Cycle")
+
         query = conseiljs.ConseilQueryBuilder.addFields(query, 'kind');
         query = conseiljs.ConseilQueryBuilder.addFields(query, 'cycle');
         query = conseiljs.ConseilQueryBuilder.addPredicate(query, 'kind', conseiljs.ConseilOperator.EQ, ['transaction']);
@@ -151,8 +153,7 @@ let transactionsPerHourQuery = async function(date) {
         barGraphFloatingTooltipGenerator(svg, xTooltip, yTooltip)
 
         svg.selectAll("g").on("click", async function(d, i) {
-            console.log("clock");
-
+            d3.select("#transactionsPerHourTitle").html(`Transactions per Hour in Cycle ${result[i].cycle}`)
 
             query = conseiljs.ConseilQueryBuilder.blankQuery();
             query = conseiljs.ConseilQueryBuilder.addFields(query, 'kind');
@@ -215,6 +216,8 @@ let transactionsPerHourQuery = async function(date) {
             barGraphFloatingTooltipGenerator(svg, xTooltip, yTooltip)
         })
     } else {
+        d3.select("#transactionsPerHourTitle").html("Transactions per Hour")
+
         query = conseiljs.ConseilQueryBuilder.addFields(query, 'kind');
         query = conseiljs.ConseilQueryBuilder.addFields(query, 'timestamp');
         query = conseiljs.ConseilQueryBuilder.addPredicate(query, 'kind', conseiljs.ConseilOperator.EQ, ['transaction']);
@@ -283,6 +286,8 @@ let transactionsPerHourQuery = async function(date) {
 let transactionVolumePerHourQuery = async function(date) {
     let query = conseiljs.ConseilQueryBuilder.blankQuery();
     if(new Date().getTime() - date > 31000000000) {
+        d3.select("#transactionVolumePerHourTitle").html("Transaction Volume per Cycle")
+
         query = conseiljs.ConseilQueryBuilder.addFields(query, 'amount');
         query = conseiljs.ConseilQueryBuilder.addFields(query, 'cycle');
         query = conseiljs.ConseilQueryBuilder.addPredicate(query, 'kind', conseiljs.ConseilOperator.EQ, ['transaction']);
@@ -300,7 +305,7 @@ let transactionVolumePerHourQuery = async function(date) {
 
         axis = d3.select("#transactionVolumePerHourAxis");
 
-        seperateAxisPrioritizedBarChartGenerator(500, 1200, svg, axis, result, "cycle", "sum_amount");
+        seperateAxisDynamicBarChartGenerator(300, 5, svg, axis, result, "cycle", "sum_amount", 0, "darkslategrey");
 
         xTooltip = function(d, i) {
             return "Cycle " + result[i].cycle
@@ -313,8 +318,7 @@ let transactionVolumePerHourQuery = async function(date) {
         barGraphFloatingTooltipGenerator(svg, xTooltip, yTooltip)
 
         svg.selectAll("g").on("click", async function(d, i) {
-            console.log("clock");
-
+            d3.select("#transactionVolumePerHourTitle").html(`Transaction Volume per Hour in Cycle ${result[i].cycle}`)
 
             query = conseiljs.ConseilQueryBuilder.blankQuery();
             query = conseiljs.ConseilQueryBuilder.addFields(query, 'amount');
@@ -328,7 +332,7 @@ let transactionVolumePerHourQuery = async function(date) {
 
             const zoomResult = await conseiljs.ConseilDataClient.executeEntityQuery(conseilServer, 'tezos', conseilServer.network, 'operations', query);
 
-            d3.select("#volumePerHourLink").attr("href", shareReport("mainnet", "operations", query))
+            d3.select("#transactionVolumePerHourLink").attr("href", shareReport("mainnet", "operations", query))
 
             timeArray = zoomResult.map(d => d.timestamp)
 
@@ -364,7 +368,7 @@ let transactionVolumePerHourQuery = async function(date) {
 
             axis = d3.select("#transactionVolumePerHourAxis");
 
-            seperateAxisPrioritizedBarChartGenerator(500, 1200, svg, axis, data, "date", "values");
+            seperateAxisDynamicBarChartGenerator(300, 5, svg, axis, data, "date", "values", 0, "darkSlateGrey");
 
             xTooltip = function(d, i) {
                 return new Date(timestamps[i])
@@ -377,6 +381,8 @@ let transactionVolumePerHourQuery = async function(date) {
             barGraphFloatingTooltipGenerator(svg, xTooltip, yTooltip)
         })
     } else {
+        d3.select("#transactionVolumePerHourTitle").html("Transaction Volume per Hour")
+
         query = conseiljs.ConseilQueryBuilder.addFields(query, 'amount');
         query = conseiljs.ConseilQueryBuilder.addFields(query, 'timestamp');
         query = conseiljs.ConseilQueryBuilder.addPredicate(query, 'kind', conseiljs.ConseilOperator.EQ, ['transaction']);
@@ -389,8 +395,6 @@ let transactionVolumePerHourQuery = async function(date) {
         const result = await conseiljs.ConseilDataClient.executeEntityQuery(conseilServer, 'tezos', conseilServer.network, 'operations', query);
 
         d3.select("#transactionVolumePerHourLink").attr("href", shareReport("mainnet", "operations", query))
-
-        console.log(result);
 
         label = [];
         timestamps = [];
@@ -437,14 +441,14 @@ let transactionVolumePerHourQuery = async function(date) {
         barGraphFloatingTooltipGenerator(svg, xTooltip, yTooltip)
     }
 
-
-
     return 4;
 }
 
 let gasSpentPerHourQuery = async function(date) {
     let query = conseiljs.ConseilQueryBuilder.blankQuery();
     if(new Date().getTime() - date > 31000000000) {
+        d3.select("#gasSpentPerHourTitle").html("Gas Consumed per Cycle")
+
         query = conseiljs.ConseilQueryBuilder.addFields(query, 'consumed_gas');
         query = conseiljs.ConseilQueryBuilder.addFields(query, 'cycle');
         query = conseiljs.ConseilQueryBuilder.addPredicate(query, 'consumed_gas', conseiljs.ConseilOperator.GT, [0]);
@@ -459,9 +463,9 @@ let gasSpentPerHourQuery = async function(date) {
 
         svg = d3.select("#gasSpentPerHour");
 
-        axis = d3.select("#gasSpentPerHourLink");
+        axis = d3.select("#gasSpentPerHourAxis");
 
-        seperateAxisPrioritizedBarChartGenerator(500, 1200, svg, axis, result, "cycle", "sum_consumed_gas");
+        seperateAxisDynamicBarChartGenerator(300, 5, svg, axis, result, "cycle", "sum_consumed_gas", 0, "darkslategrey");
 
         xTooltip = function(d, i) {
             return "Cycle " + result[i].cycle
@@ -474,6 +478,8 @@ let gasSpentPerHourQuery = async function(date) {
         barGraphFloatingTooltipGenerator(svg, xTooltip, yTooltip)
 
         svg.selectAll("g").on("click", async function(d, i) {
+            d3.select("#gasSpentPerHourTitle").html(`Gas Consumed per Hour in Cycle ${result[i].cycle}`)
+
             query = conseiljs.ConseilQueryBuilder.blankQuery();
             query = conseiljs.ConseilQueryBuilder.addFields(query, 'consumed_gas');
             query = conseiljs.ConseilQueryBuilder.addFields(query, 'timestamp');
@@ -522,7 +528,7 @@ let gasSpentPerHourQuery = async function(date) {
 
             axis = d3.select("#gasSpentPerHourAxis");
 
-            seperateAxisPrioritizedBarChartGenerator(500, 1200, svg, axis, data, "date", "values");
+            seperateAxisDynamicBarChartGenerator(300, 5, svg, axis, data, "date", "values", 0, "darkslategrey");
 
             xTooltip = function(d, i) {
                 return new Date(timestamps[i])
@@ -535,6 +541,8 @@ let gasSpentPerHourQuery = async function(date) {
             barGraphFloatingTooltipGenerator(svg, xTooltip, yTooltip)
         })
     } else {
+        d3.select("#gasSpentPerHourTitle").html("Gas Consumed per Hour")
+
         query = conseiljs.ConseilQueryBuilder.addFields(query, 'consumed_gas');
         query = conseiljs.ConseilQueryBuilder.addFields(query, 'timestamp');
         query = conseiljs.ConseilQueryBuilder.addPredicate(query, 'consumed_gas', conseiljs.ConseilOperator.GT, [0]);
