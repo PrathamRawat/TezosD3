@@ -37,6 +37,32 @@ let invokedQuery = async function(limit, date) {
 
 invokedQuery(100, Math.round(new Date().getTime()) - 2929746000);
 
-d3.select("#invokedReload").on("click", function() {
-    invokedQuery(document.getElementById("invokedNumber").value, new Date(document.getElementById("invokedDate").value));
+d3.select("#invokedButtons").select("#oneDay").on("click", function() {
+    clearGraph("topInvoked");
+    clearGraph("topInvokedAxis");
+    invokedQuery(document.getElementById("number").value, new Date().getTime() - 86400000);
+});
+
+d3.select("#invokedButtons").select("#oneWeek").on("click", function() {
+    clearGraph("topInvoked");
+    clearGraph("topInvokedAxis");
+    invokedQuery(document.getElementById("number").value, new Date().getTime() - 604800000);
+});
+
+d3.select("#invokedButtons").select("#oneMonth").on("click", function() {
+    clearGraph("topInvoked");
+    clearGraph("topInvokedAxis");
+    invokedQuery(document.getElementById("number").value, new Date().getTime() - 2629746000);
+});
+
+d3.select("#invokedButtons").select("#oneYear").on("click", function() {
+    clearGraph("topInvoked");
+    clearGraph("topInvokedAxis");
+    invokedQuery(document.getElementById("number").value, new Date().getTime() - 31556952000);
+});
+
+d3.select("#invokedButtons").select("#allTime").on("click", function() {
+    clearGraph("topInvoked");
+    clearGraph("topInvokedAxis");
+    invokedQuery(document.getElementById("number").value, 0);
 });

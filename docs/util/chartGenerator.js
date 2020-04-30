@@ -1,6 +1,11 @@
-const clearGraphs = function() {
+const clearAllGraphs = function() {
     d3.selectAll("svg").selectAll("*").remove();
 }
+
+const clearGraph = function(selector) {
+    d3.select(selector).selectAll("*").remove();
+}
+
 
 const seperateAxisStaticBarChartGenerator = function(height, width, graphSVGElement, axisSVGElement, queryResult, xAxisKey, yAxisKey) {
     
