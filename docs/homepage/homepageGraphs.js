@@ -442,7 +442,7 @@ let transactionVolumePerHourQuery = async function(date) {
     return 4;
 }
 
-let gphQuery = async function(date) {
+let gasSpentPerHourQuery = async function(date) {
     let query = conseiljs.ConseilQueryBuilder.blankQuery();
     if(new Date().getTime() - date > 31000000000) {
         query = conseiljs.ConseilQueryBuilder.addFields(query, 'consumed_gas');
