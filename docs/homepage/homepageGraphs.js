@@ -43,7 +43,7 @@ let blocksPerHourQuery = async function(date) {
 
     // temporalLineGraphGenerator(500, 1200, svg, label, data, "date", "value");
 
-    seperateAxisDynamicBarChartGenerator(300, 5, svg, axis, data, "date", "value", 20, "darkslategrey");
+    seperateAxisDynamicHistogramGenerator(300, 5, svg, axis, data, "date", "value", 20, "darkslategrey");
 
     xTooltip = function(d, i) {
         return new Date(timestamps[i])

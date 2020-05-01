@@ -15,7 +15,6 @@
 }
 .tableDates {
     background-color: darkgrey;
-
 }
 .date {
     height: 25px;
@@ -28,7 +27,7 @@
 }
 .container {
     position: relative;
-    width: 400px;
+    width: 1200px;
     background-color: slategrey;
     border: darkslategrey;
     border-style: inset;
