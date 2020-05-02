@@ -81,6 +81,8 @@ a {
     text-decoration: none;
 }
 #graphArray {
-    position: relative;
-    float: right;
+    position: absolute;
+    left: 205px;
+    right: 0px;
+    /*float: right;*/
 }
