@@ -163,42 +163,48 @@
             </tr>
             <tr>
                 <td>
-                    <h2>Blocks Per Hour</h2>
-                    <div class="chartContainer">
-                        <svg id="bphAxis" class="barChartAxis">
+                    <div class="wideContainer">
+                        <h2>Blocks Per Hour</h2>
+                        <svg id="bphAxis" class="axis">
                         </svg>
-                        <svg id="bph" class="barChart">
-                        </svg>
+                        <div class="wideChartContainer">
+                            <svg id="bph" class="barChart">
+                            </svg>
+                        </div>
+                        <a href="" id="blocksPerHourLink" class="arronaxLink">Link to Query in Arronax</a>
+                        <script src="hourlyBlocks.js"></script>
                     </div>
-                    <a href="" id="blocksPerHourLink">Link to Query in Arronax</a>
-                    <script src="hourlyBlocks.js"></script>
                 </td>
             </tr>
             <tr>
                 <td>
-                    <h2>Priority Zero Blocks Per Hour</h2>
-                    <div class="chartContainer">
+                    <div class="wideContainer">
+                        <h2>Priority Zero Blocks Per Hour</h2>
                         <svg id="priorityBPHAxis" class="barChartAxis">
                         </svg>
-                        <svg id="priorityBPH" class="barChart">
-                        </svg>
+                        <div class="wideChartContainer">
+                            <svg id="priorityBPH" class="barChart">
+                            </svg>
+                        </div>
+                        <a href="" id="priorityBlocksPerHourLink" class="arronaxLink">Link to Query in Arronax</a>
+                        <script src="prioritybph.js"></script>
                     </div>
-                    <a href="" id="priorityBlocksPerHourLink">Link to Query in Arronax</a>
-                    <script src="prioritybph.js"></script>
                 </td>
             </tr>
             <tr>
                 <td>
-                    <h2>Endorsements per Hour</h2>
-                    <div class="chartContainer">
-                        <svg id="pbe" class="barChart">
-                        </svg>
+                    <div class="wideContainer">
+                        <h2>Endorsements per Hour</h2>
+                        <div class="chartContainer">
+                            <svg id="pbe" class="barChart">
+                            </svg>
+                        </div>
+                        <br>
+                        <span id="pbeLabel"></span>
+                        <br>
+                        <a href="" id="perBlockEndorsementsLink" class="arronaxLink">Link to Query in Arronax</a>
+                        <script src="perBlockEndorsements.js"></script>
                     </div>
-                    <br>
-                    <span id="pbeLabel"></span>
-                    <br>
-                    <a href="" id="perBlockEndorsementsLink">Link to Query in Arronax</a>
-                    <script src="perBlockEndorsements.js"></script>
                 </td>
             </tr>
         </table>

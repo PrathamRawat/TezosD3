@@ -2,6 +2,7 @@
     font: 10px sans-serif;
     background-color: darkgrey;
     text-align: center;
+    bottom: 0px;
 }
 .chartContainer {
     position: relative;
@@ -13,9 +14,20 @@
     padding-left: 0;
     scroll-behavior: smooth;
 }
+.wideChartContainer {
+    position: relative;
+    width: 100%;
+    left: 100px;
+    background-color: lightgrey;
+    overflow: hidden;
+    overflow-x: scroll;
+    /*padding: 5px;*/
+    padding-left: 0;
+    scroll-behavior: smooth;
+}
+
 .tableDates {
     background-color: darkgrey;
-
 }
 .date {
     height: 25px;
@@ -33,6 +45,14 @@
     border: darkslategrey;
     border-style: inset;
 }
+.wideContainer {
+    position: relative;
+    width: 1200px;
+    background-color: slategrey;
+    border: darkslategrey;
+    border-style: inset;
+    overflow: hidden;
+}
 .toolTip {
     position: absolute;
     display: none;
@@ -47,9 +67,9 @@
 }
 .axis {
     background-color: darkgrey;
-    padding: 5px;
-    /* border-left-width: 25px; */
+    padding: 0px;
     position: absolute;
+    left: 0px;
 }
 .arronaxLink {
     position: relative;

@@ -51,7 +51,7 @@ let bphQuery = async function(date) {
 
     // temporalLineGraphGenerator(500, 1200, svg, label, data, "date", "value");
 
-    seperateAxisPrioritizedBarChartGenerator(500, 1200, svg, axis, data, "date", "value");
+    seperateAxisPrioritizedBarChartGenerator(500, 1200, svg, axis, data, "date", "value", 100);
 
     xTooltip = function(d, i) {
         return new Date(timestamps[i])

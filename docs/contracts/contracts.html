@@ -161,35 +161,39 @@
             </tr>
             <tr>
                 <td>
-                    <h2>Contracts by Balance</h2>
-                    <svg id="topContractsAxis" class="axis">
-                    </svg>
-                    <div class="wideChartContainer">
-                        <svg id="topContracts" class="barChart">
+                    <div class="wideContainer">
+                        <h2>Contracts by Balance</h2>
+                        <svg id="topContractsAxis" class="axis">
                         </svg>
+                        <div class="wideChartContainer">
+                            <svg id="topContracts" class="barChart">
+                            </svg>
+                        </div>
+                        <a href="" id="topContractsLink" class="arronaxLink">Link to Query in Arronax</a>
+                        <script src="topContracts.js"></script>
                     </div>
-                    <a href="" id="topContractsLink">Link to Query in Arronax</a>
-                    <script src="topContracts.js"></script>
                 </td>
             </tr>
             <tr>
                 <td>
-                    <h2>Contracts by Invocations</h2>
-                    <svg id="topInvokedAxis" class="axis">
-                    </svg>
-                    <div class="wideChartContainer">
-                        <svg id="topInvoked" class="barChart">
+                    <div class="wideContainer">
+                        <h2>Contracts by Invocations</h2>
+                        <svg id="topInvokedAxis" class="axis">
                         </svg>
+                        <div class="wideChartContainer">
+                            <svg id="topInvoked" class="barChart">
+                            </svg>
+                        </div>
+                        <div id="invokedButtons">
+                            <button id="oneDay">One Day</button>
+                            <button id="oneWeek">One Week</button>
+                            <button id="oneMonth">One Month</button>
+                            <button id="oneYear">One Year</button>
+                            <button id="allTime">All Time</button>
+                        </div>
+                        <a href="" id="mostInvokedLink" class="arronaxLink">Link to Query in Arronax</a>
+                        <script src="mostInvoked.js"></script>
                     </div>
-                    <div id="invokedButtons">
-                        <button id="oneDay">One Day</button>
-                        <button id="oneWeek">One Week</button>
-                        <button id="oneMonth">One Month</button>
-                        <button id="oneYear">One Year</button>
-                        <button id="allTime">All Time</button>
-                    </div>
-                    <a href="" id="mostInvokedLink">Link to Query in Arronax</a>
-                    <script src="mostInvoked.js"></script>
                 </td>
             </tr>
         </table>

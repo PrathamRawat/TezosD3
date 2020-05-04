@@ -78,7 +78,7 @@ const seperateAxisStaticBarChartGenerator = function(height, width, graphSVGElem
             .call(yAxis);
 }
 
-const seperateAxisPrioritizedBarChartGenerator = function(height, width, graphSVGElement, axisSVGElement, queryResult, xAxisKey, yAxisKey) {
+const seperateAxisPrioritizedBarChartGenerator = function(height, width, graphSVGElement, axisSVGElement, queryResult, xAxisKey, yAxisKey, axisWidth = 100, barColor = "black") {
     
     // Clear SVG Elements of old data
     graphSVGElement.selectAll("*").remove();
@@ -132,10 +132,10 @@ const seperateAxisPrioritizedBarChartGenerator = function(height, width, graphSV
     const bar = graphSVGElement.selectAll("g")
         .data(yAxisData) //Attach bars to Y-Axis data
         .join("g")
-            .attr("transform", (d, i) => `translate(${xScale(i) + 115}, ${height - yScale(d)})`);
+            .attr("transform", (d, i) => `translate(${xScale(i)}, ${height - yScale(d)})`);
 
     bar.append("rect")
-        .attr("fill", "purple")
+        .attr("fill", barColor)
         .attr("width", xScale.bandwidth() - 1) // Sets a padding of one pixel between bars
         .attr("height", yScale);
     
@@ -152,12 +152,13 @@ const seperateAxisPrioritizedBarChartGenerator = function(height, width, graphSV
     // Prepare the Y-Axis Element
     axisSVGElement
         .attr("height", height)
-        .attr("class", "axis");
+        .attr("class", "axis")
+        .attr("width", axisWidth)
 
     // Attach the axis to the SVG Element
     axisSVGElement
         .append("g")
-            .attr("transform", `translate(100, ${height})`)
+            .attr("transform", `translate(${axisWidth}, ${height})`)
             .style("color", "black")
             .call(yAxis);
 }
@@ -202,7 +203,7 @@ const seperateAxisDynamicBarChartGenerator = function(height, barWidth, graphSVG
     const bar = graphSVGElement.selectAll("g")
         .data(yAxisData) //Attach bars to Y-Axis data
         .join("g")
-            .attr("transform", (d, i) => `translate(${xScale(i) + axisWidth + 15}, ${height - yScale(d)})`);
+            .attr("transform", (d, i) => `translate(${xScale(i)}, ${height - yScale(d)})`);
 
     // Add a rectangle to the bar element
     bar.append("rect")
