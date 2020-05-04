@@ -163,46 +163,52 @@
             </tr>
             <tr>
                 <td>
-                    <h2>Top Bakers by Stake</h2>
-                    <div class="chartContainer">
+                    <div class="wideContainer">
+                        <h2>Top Bakers by Stake</h2>
                         <svg id="topStakersAxis" class="axis">
                         </svg>
-                        <svg id="topStakers" class="barChart">
-                        </svg>
+                        <div class="wideChartContainer">
+                            <svg id="topStakers" class="barChart">
+                            </svg>
+                        </div>
+                        <a href="" id="topStakersLink" class="arronaxLink">Link to Query in Arronax</a>
+                        <script src="topStakers.js"></script>
                     </div>
-                    <a href="" id="topStakersLink">Link to Query in Arronax</a>
-                    <script src="topStakers.js"></script>
                 </td>
             </tr>
             <tr>
                 <td>
-                    <h2>Top Bakers by Block</h2>
-                    <div class="chartContainer">
+                    <div class="wideContainer">
+                        <h2>Top Bakers by Block</h2>
                         <svg id="topBakersAxis" class="axis">
                         </svg>
-                        <svg id="topBakers" class="barChart">
-                        </svg>
+                        <div class="wideChartContainer">
+                            <svg id="topBakers" class="barChart">
+                            </svg>
+                        </div>
+                        <br>
+                        Blocks Before: <input type="date" id="blockDate">
+                        <br>
+                        <button id="blockReload">Reload</button>
+                        <a href="" id="topBakersLink" class="arronaxLink">Link to Query in Arronax</a>
+                        <script src="topBakers.js"></script>
                     </div>
-                    <br>
-                    Blocks Before: <input type="date" id="blockDate">
-                    <br>
-                    <button id="blockReload">Reload</button>
-                    <a href="" id="topBakersLink">Link to Query in Arronax</a>
-                    <script src="topBakers.js"></script>
                 </td>
             </tr>
             <tr>
                 <td>
-                    <h2>Top Bakers by Delegations</h2>
-                    <div class="chartContainer">
+                    <div class="wideContainer">
+                        <h2>Top Bakers by Delegations</h2>
                         <svg id="topDelegatesAxis" class="axis">
                         </svg>
-                        <svg id="topDelegates" class="barChart">
-                        </svg>
+                        <div class="wideChartContainer">
+                            <svg id="topDelegates" class="barChart">
+                            </svg>
+                        </div>
+                        <br>
+                        <a href="" id="mostDelegatedLink" class="arronaxLink">Link to Query in Arronax</a>
+                        <script src="mostDelegated.js"></script>
                     </div>
-                    <br>
-                    <a href="" id="mostDelegatedLink">Link to Query in Arronax</a>
-                    <script src="mostDelegated.js"></script>
                 </td>
             </tr>
         </table>
