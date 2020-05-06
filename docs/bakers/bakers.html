@@ -152,19 +152,19 @@
             <tr>
                 <td>
                     <h1>Bakers</h1>
-                    Query Limit <input type="number" id="number">
-                    <br>
-                    <button id="reload">Reload</button>
-                    <br>
-                    <br>
-
-                    <a href="../index.html"><- Back</a>
                 </td>
             </tr>
             <tr>
                 <td>
                     <div class="wideContainer">
                         <h2>Top Bakers by Stake</h2>
+                        <table class="wideOptions">
+                            <tr>
+                                <td class="wideChartOption">
+                                    Query Limit: <input type="number" id="topStakersNumber" value="100"> <button id="topStakersReload">Reload</button>
+                                </td>
+                            </tr>
+                        </table>
                         <svg id="topStakersAxis" class="axis">
                         </svg>
                         <div class="wideChartContainer">
@@ -180,16 +180,34 @@
                 <td>
                     <div class="wideContainer">
                         <h2>Top Bakers by Block</h2>
+                        <table class="wideOptions">
+                            <tr id="topBakersOptions">
+                                <td class="wideChartOption" id="oneDay">
+                                    One Day
+                                </td>
+                                <td class="wideChartOption" id="oneWeek">
+                                    One Week
+                                </td>
+                                <td class="wideChartOption" id="oneMonth">
+                                    One Month
+                                </td>
+                                <td class="wideChartOption" id="oneYear">
+                                    One Year
+                                </td>
+                                <td class="wideChartOption" id="allTime">
+                                    All Time
+                                </td>
+                                <td class="wideChartOption">
+                                    Query Limit: <input type="number" id="topBakersNumber" value="100"> <button id="topBakersReload">Reload</button>
+                                </td>
+                            </tr>
+                        </table>
                         <svg id="topBakersAxis" class="axis">
                         </svg>
                         <div class="wideChartContainer">
                             <svg id="topBakers" class="barChart">
                             </svg>
                         </div>
-                        <br>
-                        Blocks Before: <input type="date" id="blockDate">
-                        <br>
-                        <button id="blockReload">Reload</button>
                         <a href="" id="topBakersLink" class="arronaxLink">Link to Query in Arronax</a>
                         <script src="topBakers.js"></script>
                     </div>
@@ -199,6 +217,13 @@
                 <td>
                     <div class="wideContainer">
                         <h2>Top Bakers by Delegations</h2>
+                        <table class="wideOptions">
+                            <tr id="topDelegatesOptions">
+                                <td class="wideChartOption">
+                                    Query Limit: <input type="number" id="topDelegatesNumber" value="100"> <button id="topDelegatesReload">Reload</button>
+                                </td>
+                            </tr>
+                        </table>
                         <svg id="topDelegatesAxis" class="axis">
                         </svg>
                         <div class="wideChartContainer">

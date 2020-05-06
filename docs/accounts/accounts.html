@@ -152,15 +152,19 @@
             <tr>
                 <td>
                     <h1>Accounts</h1>
-                    Query Limit <input type="number" id="number">
-                    <br>
-                    <button id="reload">Reload</button>
                 </td>
             </tr>
             <tr>
                 <td>
                     <div class="wideContainer">
                         <h2>Forbes' Top Richest Accounts</h2>
+                        <table class="wideOptions">
+                            <tr>
+                                <td class="wideChartOption">
+                                    Query Limit: <input type="number" id="number" value="100"> <button id="reload">Reload</button>
+                                </td>
+                            </tr>
+                        </table>
                         <svg id="topAccountsAxis" class="axis">
                         </svg>
                         <div class="wideChartContainer">

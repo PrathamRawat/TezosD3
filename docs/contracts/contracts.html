@@ -152,17 +152,19 @@
             <tr>
                 <td>
                     <h1>Contracts</h1>
-                    <a href="../index.html"><- Back</a>
-                    <br>
-                    Query Limit <input type="number" id="number">
-                    <br>
-                    <button id="reload">Reload</button>
                 </td>
             </tr>
             <tr>
                 <td>
                     <div class="wideContainer">
                         <h2>Contracts by Balance</h2>
+                        <table class="wideOptions">
+                            <tr>
+                                <td class="wideChartOption">
+                                    Query Limit: <input type="number" id="topContractsNumber" value="100"> <button id="topContractsReload">Reload</button>
+                                </td>
+                            </tr>
+                        </table>
                         <svg id="topContractsAxis" class="axis">
                         </svg>
                         <div class="wideChartContainer">
@@ -178,18 +180,33 @@
                 <td>
                     <div class="wideContainer">
                         <h2>Contracts by Invocations</h2>
+                        <table class="wideOptions">
+                            <tr id="topInvokedOptions">
+                                <td class="wideChartOption" id="oneDay">
+                                    One Day
+                                </td>
+                                <td class="wideChartOption" id="oneWeek">
+                                    One Week
+                                </td>
+                                <td class="wideChartOption" id="oneMonth">
+                                    One Month
+                                </td>
+                                <td class="wideChartOption" id="oneYear">
+                                    One Year
+                                </td>
+                                <td class="wideChartOption" id="allTime">
+                                    All Time
+                                </td>
+                                <td class="wideChartOption">
+                                    Query Limit: <input type="number" id="topInvokedNumber" value="100"> <button id="topInvokedReload">Reload</button>
+                                </td>
+                            </tr>
+                        </table>
                         <svg id="topInvokedAxis" class="axis">
                         </svg>
                         <div class="wideChartContainer">
                             <svg id="topInvoked" class="barChart">
                             </svg>
-                        </div>
-                        <div id="invokedButtons">
-                            <button id="oneDay">One Day</button>
-                            <button id="oneWeek">One Week</button>
-                            <button id="oneMonth">One Month</button>
-                            <button id="oneYear">One Year</button>
-                            <button id="allTime">All Time</button>
                         </div>
                         <a href="" id="mostInvokedLink" class="arronaxLink">Link to Query in Arronax</a>
                         <script src="mostInvoked.js"></script>

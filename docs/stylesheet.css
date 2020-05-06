@@ -106,3 +106,22 @@ a {
     right: 0px;
     /*float: right;*/
 }
+.wideOptions {
+    background-color: darkgrey;
+    width: 100%;
+}
+.wideChartOption {
+    height: 25px;
+    background-color: lightgrey;
+    text-align: center;
+    margin-bottom: 0px;
+}
+.wideChartOption:hover {
+    background-color: grey;
+}
+.pageControlPanel {
+    border-style: inset;
+    border-color: darkslategrey;
+    border-width: 2px;
+    background-color: darkgrey;
+}
