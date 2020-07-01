@@ -8,6 +8,7 @@ transactionVolumePerHourQuery(now - (3600000 * 168));
 transactionsPerHourQuery(now - (3600000 * 168));
 priorityZeroBlocksPerHourQuery(now - (604800000));
 blocksPerHourQuery(now - (604800000));
+endorsementsPerBlockQuery(now - 86400000)
 
 // Date Event Listeners for Blocks per Hour
 d3.select("#blocksPerHourDates").select("#oneWeek").style("background-color", "darkgrey")
@@ -96,35 +97,46 @@ d3.select("#priorityZeroBlocksPerHourDates").select("#allTime").on("click", func
 });
 
 
-// TODO: Date Event Listeners for Endorsements Per Block
+d3.select("#endorsementsPerBlockDates").select("#oneDay").style("background-color", "darkgrey")
+
 d3.select("#endorsementsPerBlockDates").select("#oneDay").on("click", function() {
     clearGraph("#endorsementsPerBlock")
     clearGraph("#endorsementsPerBlockAxis")
-    pbeQuery(new Date().getTime() - 86400000);
+    endorsementsPerBlockQuery(new Date().getTime() - 86400000);
+    d3.select("#endorsementsPerBlockDates").selectAll(".date").style("background-color", "lightgrey")
+    d3.select("#endorsementsPerBlockDates").select("#oneDay").style("background-color", "darkgrey")
 });
 
 d3.select("#endorsementsPerBlockDates").select("#oneWeek").on("click", function() {
     clearGraph("#endorsementsPerBlock")
     clearGraph("#endorsementsPerBlockAxis")
-    pbeQuery(new Date().getTime() - 604800000);
+    endorsementsPerBlockQuery(new Date().getTime() - 604800000);
+    d3.select("#endorsementsPerBlockDates").selectAll(".date").style("background-color", "lightgrey")
+    d3.select("#endorsementsPerBlockDates").select("#oneWeek").style("background-color", "darkgrey")
 });
 
 d3.select("#endorsementsPerBlockDates").select("#oneMonth").on("click", function() {
     clearGraph("#endorsementsPerBlock")
     clearGraph("#endorsementsPerBlockAxis")
-    pbeQuery(new Date().getTime() - 2629746000);
+    endorsementsPerBlockQuery(new Date().getTime() - 2629746000);
+    d3.select("#endorsementsPerBlockDates").selectAll(".date").style("background-color", "lightgrey")
+    d3.select("#endorsementsPerBlockDates").select("#oneMonth").style("background-color", "darkgrey")
 });
 
 d3.select("#endorsementsPerBlockDates").select("#oneYear").on("click", function() {
     clearGraph("#endorsementsPerBlock")
     clearGraph("#endorsementsPerBlockAxis")
-    pbeQuery(new Date().getTime() - 31556952000);
+    endorsementsPerBlockQuery(new Date().getTime() - 31556952000);
+    d3.select("#endorsementsPerBlockDates").selectAll(".date").style("background-color", "lightgrey")
+    d3.select("#endorsementsPerBlockDates").select("#oneYear").style("background-color", "darkgrey")
 });
 
 d3.select("#endorsementsPerBlockDates").select("#allTime").on("click", function() {
     clearGraph("#priorityZeroBlocksPerHour")
     clearGraph("#priorityZeroBlocksPerHourAxis")
-    pbeQuery(1530316800000);
+    endorsementsPerBlockQuery(1530316800000);
+    d3.select("#endorsementsPerBlockDates").selectAll(".date").style("background-color", "lightgrey")
+    d3.select("#endorsementsPerBlockDates").select("#allTime").style("background-color", "darkgrey")
 });
 
 // Date Event Listeners for Transactions Per Hour

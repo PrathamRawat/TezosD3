@@ -11,6 +11,8 @@ let bakerQuery = async function(limit, date) {
 
     const result = await conseiljs.ConseilDataClient.executeEntityQuery(conseilServer, 'tezos', conseilServer.network, 'blocks', query);
 
+    console.log(result)
+
     d3.select("#topBakersLink").attr("href", shareReport("mainnet", "blocks", query))
 
     graphSVG = d3.select("#topBakers");

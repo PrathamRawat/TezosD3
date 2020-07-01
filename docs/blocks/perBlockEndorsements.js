@@ -1,5 +1,5 @@
 
-let pbeQuery = async function(date) {
+let endorsementsPerBlockQuery = async function(date) {
     let query = conseiljs.ConseilQueryBuilder.blankQuery();
     if(new Date().getTime() - date > 31000000000) {
         query = conseiljs.ConseilQueryBuilder.addFields(query, 'kind');
@@ -119,4 +119,4 @@ now.setMinutes(0, 0, 0);
 
 now = now.getTime();
 
-pbeQuery(now - (3600000 * 168));
+endorsementsPerBlockQuery(now - (3600000 * 168));

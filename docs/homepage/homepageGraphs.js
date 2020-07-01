@@ -605,3 +605,36 @@ let gasSpentPerHourQuery = async function(date) {
 
     return 6;
 }
+
+let endorsementsPerBlockQuery = async function(date) {
+    let query = conseiljs.ConseilQueryBuilder.blankQuery();
+
+    query = conseiljs.ConseilQueryBuilder.addFields(query, "block_level", "kind");
+    query = conseiljs.ConseilQueryBuilder.addPredicate(query, 'timestamp', conseiljs.ConseilOperator.BETWEEN, [date, new Date().getTime()]);
+    query = conseiljs.ConseilQueryBuilder.addPredicate(query, "kind", conseiljs.ConseilOperator.EQ, ["endorsement"]);
+    query = conseiljs.ConseilQueryBuilder.addAggregationFunction(query, "kind", conseiljs.ConseilFunction.count);
+    query = conseiljs.ConseilQueryBuilder.addOrdering(query, "block_level", conseiljs.ConseilSortDirection.DESC);
+    query = conseiljs.ConseilQueryBuilder.setLimit(query, 1000000000);
+
+    const result = await conseiljs.ConseilDataClient.executeEntityQuery(conseilServer, 'tezos', conseilServer.network, 'operations', query);
+
+    console.log(result)
+
+    d3.select("#endorsementsPerBlockLink").attr("href", shareReport("mainnet", "operations", query))
+
+    svg = d3.select("#endorsementsPerBlock");
+
+    axis = d3.select("#endorsementsPerBlockAxis");
+
+    seperateAxisDynamicBarChartGenerator(300, 5, svg, axis, result, "block_level", "count_kind", 0, "darkslategrey");
+
+    xTooltip = function(d, i) {
+        return "Block Level " + (result[i]["block_level"] - 1)
+    }
+
+    yTooltip = function(d, i) {
+        return d + " Endorsements"
+    }
+
+    barGraphFloatingTooltipGenerator(svg, xTooltip, yTooltip)
+}
