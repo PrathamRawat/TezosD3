@@ -132,8 +132,8 @@ d3.select("#endorsementsPerBlockDates").select("#oneYear").on("click", function(
 });
 
 d3.select("#endorsementsPerBlockDates").select("#allTime").on("click", function() {
-    clearGraph("#priorityZeroBlocksPerHour")
-    clearGraph("#priorityZeroBlocksPerHourAxis")
+    clearGraph("#endorsementsPerBlock")
+    clearGraph("#endorsementsPerBlockAxis")
     endorsementsPerBlockQuery(1530316800000);
     d3.select("#endorsementsPerBlockDates").selectAll(".date").style("background-color", "lightgrey")
     d3.select("#endorsementsPerBlockDates").select("#allTime").style("background-color", "darkgrey")
